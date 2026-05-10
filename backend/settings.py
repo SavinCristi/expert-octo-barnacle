@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-local-dev-fallback-key')
 
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
@@ -133,3 +133,17 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# ── Email ─────────────────────────────────────────────────────────────────
+# In development the console backend prints emails to stdout so nothing
+# needs to be configured.  In production set the env vars below.
+EMAIL_BACKEND      = os.environ.get('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
+EMAIL_HOST         = os.environ.get('EMAIL_HOST',         'smtp.gmail.com')
+EMAIL_PORT         = int(os.environ.get('EMAIL_PORT',     '587'))
+EMAIL_USE_TLS      = os.environ.get('EMAIL_USE_TLS',      'True') == 'True'
+EMAIL_HOST_USER    = os.environ.get('EMAIL_HOST_USER',    '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'noreply@vanatorul.ro')
+
+# Used in the admin link included in reservation notification emails
+SITE_URL = os.environ.get('SITE_URL', 'http://localhost:8000')

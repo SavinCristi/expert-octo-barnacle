@@ -2,6 +2,17 @@
 
 {% block title %}Restaurant Vânătorul · Poiana Brașov{% endblock %}
 
+{% block extra_head %}
+<style>
+  /* Hide horizontal scrollbar on the sub-category row while keeping scroll */
+  .menu-sub-scroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .menu-sub-scroll::-webkit-scrollbar { display: none; }
+</style>
+{% endblock %}
+
 {% block content %}
 
 <!-- ═══════════════════════════════════════════════════════════════════════
@@ -77,28 +88,28 @@
           <polygon points="21,12 24,7 27,12" fill="#facc15"/>
           <line x1="4" y1="42" x2="44" y2="42" stroke="#0d3320" stroke-width="0.5" opacity="0.2"/>
         </svg>
-        <span class="md:hidden text-[10px] uppercase tracking-widest2 text-forest
+        <span class="md:hidden text-xs font-medium uppercase tracking-widest2 text-forest
                      group-hover:text-bark transition-colors leading-tight" data-i18n="vert.menu.mobile">Meniu</span>
-        <span class="hidden md:inline text-[10px] uppercase tracking-widest2 text-forest
+        <span class="hidden md:inline text-xs font-medium uppercase tracking-widest2 text-forest md:text-sm
                      group-hover:text-bark transition-colors leading-tight" data-i18n="vert.menu.desktop">Explorează Meniu</span>
       </button>
 
       <!-- ── 2. Rezervă Masă ── -->
       <button data-show-panel="panel-rezervare"
               class="group flex items-center gap-2.5 px-3 py-3 sm:px-4
-                     border border-stone-200 bg-cream
-                     hover:border-forest/40 hover:bg-yellow-50/50
+                     border border-forest bg-forest
+                     hover:bg-emerald-900 hover:border-emerald-900
                      transition-all duration-200 cursor-pointer justify-center
                      min-h-[48px] w-full md:w-auto">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20"
              class="shrink-0" aria-hidden="true">
-          <polygon points="0,42 10,28 20,36 32,22 48,36 48,42" fill="#0d3320" opacity="0.1"/>
-          <polygon points="6,42 24,8 42,42" fill="#0d3320"/>
+          <polygon points="0,42 10,28 20,36 32,22 48,36 48,42" fill="#faf8f5" opacity="0.15"/>
+          <polygon points="6,42 24,8 42,42" fill="#faf8f5" opacity="0.9"/>
           <polygon points="21,12 24,7 27,12" fill="#facc15"/>
-          <line x1="4" y1="42" x2="44" y2="42" stroke="#0d3320" stroke-width="0.5" opacity="0.2"/>
+          <line x1="4" y1="42" x2="44" y2="42" stroke="#faf8f5" stroke-width="0.5" opacity="0.3"/>
         </svg>
-        <span class="text-[10px] uppercase tracking-widest2 text-forest
-                     group-hover:text-bark transition-colors leading-tight" data-i18n="vert.book">
+        <span class="text-xs font-semibold uppercase tracking-widest2 text-cream md:text-sm
+                     transition-colors leading-tight" data-i18n="vert.book">
           Rezervă Masă
         </span>
       </button>
@@ -117,7 +128,7 @@
           <polygon points="21,12 24,7 27,12" fill="#facc15"/>
           <line x1="4" y1="42" x2="44" y2="42" stroke="#0d3320" stroke-width="0.5" opacity="0.2"/>
         </svg>
-        <span class="text-[10px] uppercase tracking-widest2 text-forest
+        <span class="text-xs font-medium uppercase tracking-widest2 text-forest md:text-sm
                      group-hover:text-bark transition-colors leading-tight" data-i18n="vert.events">
           Evenimente
         </span>
@@ -147,9 +158,9 @@
             <polygon points="22,10 24,7 26,10" fill="#facc15"/>
             <line x1="4" y1="42" x2="44" y2="42" stroke="#0d3320" stroke-width="0.5" opacity="0.2"/>
           </svg>
-          <span class="md:hidden text-[10px] uppercase tracking-widest2 text-forest
+          <span class="md:hidden text-xs font-medium uppercase tracking-widest2 text-forest
                        group-hover:text-bark transition-colors leading-tight" data-i18n="vert.casa-emil.mobile">Casa Emil</span>
-          <span class="hidden md:inline text-[10px] uppercase tracking-widest2 text-forest
+          <span class="hidden md:inline text-xs font-medium uppercase tracking-widest2 text-forest md:text-sm
                        group-hover:text-bark transition-colors leading-tight" data-i18n="vert.casa-emil.desktop">Cazare Casa Emil</span>
         </a>
         <span id="tooltip-casaemil"
@@ -158,7 +169,7 @@
                      bg-cream px-2 py-0.5 border border-stone-100
                      opacity-0 group-hover:opacity-100 transition-opacity duration-300
                      pointer-events-none">
-          Se redescide · Decembrie 2026
+          Se redeschide · Decembrie 2026
         </span>
       </div>
 
@@ -177,9 +188,9 @@
             <polygon points="21,12 24,7 27,12" fill="#facc15"/>
             <line x1="4" y1="42" x2="44" y2="42" stroke="#0d3320" stroke-width="0.5" opacity="0.2"/>
           </svg>
-          <span class="text-[10px] uppercase tracking-widest2 text-forest
+          <span class="text-xs font-medium uppercase tracking-widest2 text-forest md:text-sm
                        group-hover:text-bark transition-colors leading-tight">
-            Roua Speciality Coffee
+            Roua Origins Coffee
           </span>
         </a>
         <span id="tooltip-roua"
@@ -284,33 +295,109 @@
 </div>
 
 
-<!-- ═══════════════════════════════════════════════════════════════════════
-     MENU
-═══════════════════════════════════════════════════════════════════════ -->
-<section id="meniu" class="bg-white">
-
-  <!-- Section header -->
-  <div class="max-w-7xl mx-auto px-6 lg:px-12 pt-10 pb-6 md:pt-20 md:pb-12">
-    <div class="flex items-baseline gap-6 border-b border-stone-200 pb-6">
-      <h2 class="font-serif text-3xl sm:text-4xl text-forest">Meniu</h2>
+<!-- Section header (scrolls away naturally) -->
+<div class="bg-white">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 pt-10 pb-6 md:pt-16 md:pb-8">
+    <div class="flex items-baseline gap-6 border-b border-stone-200 pb-5">
+      <h2 class="font-serif text-3xl sm:text-4xl text-forest" id="meniu">Meniu</h2>
       <span class="flex-1 h-px self-center bg-stone-100"></span>
       <p class="text-[10px] uppercase tracking-widest3 text-bark" data-i18n="meniu.subtitle">Bucătăria noastră</p>
     </div>
   </div>
+</div>
 
-  <div class="max-w-7xl mx-auto px-6 lg:px-12 pb-16 md:pb-28 space-y-12 md:space-y-24">
+<!-- ═══════════════════════════════════════════════════════════════════════
+     TWO-TIER STICKY NAVIGATION
+     Sticks below the site header (top-14 = 56 px) at z-40
+═══════════════════════════════════════════════════════════════════════ -->
+<div class="sticky top-14 z-40 bg-cream shadow-sm" id="menu-tab-nav">
 
-    {% for category, items in menu_sections %}
+  <!-- ── Tier 1: Mâncare / Băutură ──────────────────────────────────── -->
+  <div class="border-b border-stone-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+      <div class="flex">
+        <button class="menu-main-tab px-6 py-3.5
+                       text-[11px] uppercase tracking-widest2
+                       border-b-2 transition-colors duration-150
+                       text-forest font-semibold border-forest"
+                data-main="mancare">
+          Mâncare
+        </button>
+        <button class="menu-main-tab px-6 py-3.5
+                       text-[11px] uppercase tracking-widest2
+                       border-b-2 transition-colors duration-150
+                       text-stone-400 border-transparent hover:text-stone-600"
+                data-main="bautura">
+          Băutură
+        </button>
+      </div>
+    </div>
+  </div>
 
-    <!-- ── Category block ── -->
-    <div>
+  <!-- ── Tier 2a: Food subcategories ───────────────────────────────── -->
+  <div id="sub-nav-mancare" class="menu-sub-nav overflow-x-auto menu-sub-scroll border-b border-stone-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-2.5 flex gap-1.5 whitespace-nowrap">
+      <button class="menu-sub-tab px-3 py-1.5 text-[10px] uppercase tracking-widest2 transition-colors"
+              data-main="mancare" data-sub="antreuri">Antreuri</button>
+      <button class="menu-sub-tab px-3 py-1.5 text-[10px] uppercase tracking-widest2 transition-colors"
+              data-main="mancare" data-sub="ciorbe">Ciorbe</button>
+      <button class="menu-sub-tab px-3 py-1.5 text-[10px] uppercase tracking-widest2 transition-colors"
+              data-main="mancare" data-sub="feluri-principale">Feluri Principale</button>
+      <button class="menu-sub-tab px-3 py-1.5 text-[10px] uppercase tracking-widest2 transition-colors"
+              data-main="mancare" data-sub="garnituri">Garnituri</button>
+      <button class="menu-sub-tab px-3 py-1.5 text-[10px] uppercase tracking-widest2 transition-colors"
+              data-main="mancare" data-sub="salate">Salate</button>
+      <button class="menu-sub-tab px-3 py-1.5 text-[10px] uppercase tracking-widest2 transition-colors"
+              data-main="mancare" data-sub="deserturi">Deserturi</button>
+    </div>
+  </div>
+
+  <!-- ── Tier 2b: Drink subcategories (hidden by default) ──────────── -->
+  <div id="sub-nav-bautura" class="menu-sub-nav hidden overflow-x-auto menu-sub-scroll border-b border-stone-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-2.5 flex gap-1.5 whitespace-nowrap">
+      <button class="menu-sub-tab px-3 py-1.5 text-[10px] uppercase tracking-widest2 transition-colors"
+              data-main="bautura" data-sub="racoritoare">Răcoritoare</button>
+      <button class="menu-sub-tab px-3 py-1.5 text-[10px] uppercase tracking-widest2 transition-colors"
+              data-main="bautura" data-sub="energizante">Energizante</button>
+      <button class="menu-sub-tab px-3 py-1.5 text-[10px] uppercase tracking-widest2 transition-colors"
+              data-main="bautura" data-sub="cafea-ceai">Cafea & Ceai</button>
+      <button class="menu-sub-tab px-3 py-1.5 text-[10px] uppercase tracking-widest2 transition-colors"
+              data-main="bautura" data-sub="bere">Bere</button>
+      <button class="menu-sub-tab px-3 py-1.5 text-[10px] uppercase tracking-widest2 transition-colors"
+              data-main="bautura" data-sub="alcool">Alcool</button>
+      <button class="menu-sub-tab px-3 py-1.5 text-[10px] uppercase tracking-widest2 transition-colors"
+              data-main="bautura" data-sub="vin-spumant">Vin Spumant</button>
+      <button class="menu-sub-tab px-3 py-1.5 text-[10px] uppercase tracking-widest2 transition-colors"
+              data-main="bautura" data-sub="vinuri-roze">Vinuri Roze</button>
+      <button class="menu-sub-tab px-3 py-1.5 text-[10px] uppercase tracking-widest2 transition-colors"
+              data-main="bautura" data-sub="vinuri-albe">Vinuri Albe</button>
+      <button class="menu-sub-tab px-3 py-1.5 text-[10px] uppercase tracking-widest2 transition-colors"
+              data-main="bautura" data-sub="vinuri-rosii">Vinuri Roșii</button>
+    </div>
+  </div>
+
+</div><!-- /menu-tab-nav -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     MENU CONTENT
+     All category blocks are rendered; JS shows exactly one at a time.
+═══════════════════════════════════════════════════════════════════════ -->
+<section class="bg-white">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 pb-16 md:pb-28">
+
+    {% for category, items, main_cat, sub_slug in menu_sections %}
+
+    <!-- ── Category block — hidden until selected by JS ── -->
+    <div class="menu-cat-block hidden pt-10 md:pt-14"
+         data-main-cat="{{ main_cat }}"
+         data-sub-cat="{{ sub_slug }}">
 
       <!-- Category heading with folk-art diamond accent -->
       <div class="flex items-center gap-5 mb-6 md:mb-10">
         <h3 class="font-serif text-2xl sm:text-3xl text-forest whitespace-nowrap">
           {{ category }}
         </h3>
-        <!-- Inline folk-art micro-rule -->
         <span class="flex items-center gap-1.5 flex-1 min-w-0">
           <span class="h-px w-4 bg-stone-300 shrink-0"></span>
           <svg width="10" height="10" viewBox="0 0 10 10" class="shrink-0" aria-hidden="true">
@@ -327,7 +414,7 @@
         </span>
       </div>
 
-      <!-- Items grid — CSS border trick for seamless table-style grid -->
+      <!-- Items grid — CSS border trick for seamless table-style layout -->
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
                   border-l border-t border-stone-200">
         {% for item in items %}
@@ -343,7 +430,6 @@
           </div>
           {% endif %}
 
-          <!-- Item name -->
           <h4 class="font-serif text-[15px] text-forest leading-snug mb-3
                      group-hover:text-emerald-800 transition-colors">
             {{ item.name }}
@@ -357,19 +443,14 @@
           <div class="flex-1"></div>
           {% endif %}
 
-          <!-- Price row -->
-          <div class="flex items-end justify-between pt-3 mt-auto
-                      border-t border-stone-100">
+          <div class="flex items-end justify-between pt-3 mt-auto border-t border-stone-100">
             {% if item.weight %}
             <span class="text-[11px] text-stone-400 tracking-wide">{{ item.weight }}</span>
             {% else %}
             <span></span>
             {% endif %}
-
             <div class="text-right leading-none">
-              <span class="font-serif text-xl text-yellow-500 font-semibold">
-                {{ item.price }}
-              </span>
+              <span class="font-serif text-xl text-yellow-500 font-semibold">{{ item.price }}</span>
               <span class="text-xs text-stone-400 ml-1">lei</span>
             </div>
           </div>
@@ -377,13 +458,13 @@
         {% endfor %}
       </div>
 
-    </div><!-- /category block -->
+    </div><!-- /menu-cat-block -->
 
     {% empty %}
     <p class="py-24 text-center text-stone-400" data-i18n="meniu.empty">Meniul nu este disponibil momentan.</p>
     {% endfor %}
 
-  </div><!-- /menu container -->
+  </div>
 </section>
 
 </div><!-- /panel-meniu -->
@@ -406,80 +487,161 @@
       </div>
     </div>
 
-    <!-- Form -->
-    <form class="space-y-8" action="mailto:Office@restaurant-vanatorul.ro" method="get" enctype="text/plain">
+    <!-- ── Form wrap (hidden on success) ────────────────────────────── -->
+    <div id="rezervare-form-wrap">
+      <form id="rezervare-form" class="space-y-8" novalidate
+            action="{% url 'reserve' %}" method="post">
+        {% csrf_token %}
 
-      <!-- Name + Phone -->
-      <div class="grid sm:grid-cols-2 gap-6">
+        <!-- Name + Phone -->
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div class="flex flex-col gap-2">
+            <label class="text-[10px] uppercase tracking-widest2 text-bark" for="r-name" data-i18n="rezervare.name">
+              Nume complet
+            </label>
+            <input id="r-name" name="name" type="text" required
+                   placeholder="Ion Popescu"
+                   class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
+                          placeholder:text-stone-300 focus:outline-none focus:border-forest
+                          transition-colors" />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label class="text-[10px] uppercase tracking-widest2 text-bark" for="r-phone" data-i18n="rezervare.phone">
+              Telefon
+            </label>
+            <input id="r-phone" name="phone" type="tel" required
+                   placeholder="+40 7xx xxx xxx"
+                   class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
+                          placeholder:text-stone-300 focus:outline-none focus:border-forest
+                          transition-colors" />
+          </div>
+        </div>
+
+        <!-- Email — full width row -->
         <div class="flex flex-col gap-2">
-          <label class="text-[10px] uppercase tracking-widest2 text-bark" for="r-name" data-i18n="rezervare.name">
-            Nume complet
+          <label class="text-[10px] uppercase tracking-widest2 text-bark" for="r-email" data-i18n="rezervare.email">
+            Email
           </label>
-          <input id="r-name" name="name" type="text" required
-                 placeholder="Ion Popescu"
+          <input id="r-email" name="email" type="email" required
+                 placeholder="ion.popescu@email.com"
                  class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
                         placeholder:text-stone-300 focus:outline-none focus:border-forest
                         transition-colors" />
         </div>
-        <div class="flex flex-col gap-2">
-          <label class="text-[10px] uppercase tracking-widest2 text-bark" for="r-phone" data-i18n="rezervare.phone">
-            Telefon
-          </label>
-          <input id="r-phone" name="phone" type="tel" required
-                 placeholder="+40 7xx xxx xxx"
-                 class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
-                        placeholder:text-stone-300 focus:outline-none focus:border-forest
-                        transition-colors" />
+
+        <!-- Date + Time + Guests -->
+        <div class="grid sm:grid-cols-3 gap-6">
+          <div class="flex flex-col gap-2">
+            <label class="text-[10px] uppercase tracking-widest2 text-bark" for="r-date" data-i18n="rezervare.date">
+              Data
+            </label>
+            <input id="r-date" name="date" type="date" required
+                   class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
+                          focus:outline-none focus:border-forest transition-colors" />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label class="text-[10px] uppercase tracking-widest2 text-bark" for="r-time" data-i18n="rezervare.time">
+              Ora
+            </label>
+            <select id="r-time" name="time"
+                    class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
+                           focus:outline-none focus:border-forest transition-colors appearance-none">
+              <option value="">— Alege ora —</option>
+              <option value="12:30">12:30</option>
+              <option value="13:00">13:00</option>
+              <option value="13:30">13:30</option>
+              <option value="14:00">14:00</option>
+              <option value="14:30">14:30</option>
+              <option value="15:00">15:00</option>
+              <option value="15:30">15:30</option>
+              <option value="16:00">16:00</option>
+              <option value="16:30">16:30</option>
+              <option value="17:00">17:00</option>
+              <option value="17:30">17:30</option>
+              <option value="18:00">18:00</option>
+              <option value="18:30">18:30</option>
+              <option value="19:00">19:00</option>
+              <option value="19:30">19:30</option>
+              <option value="20:00">20:00</option>
+              <option value="20:30">20:30</option>
+              <option value="21:00">21:00</option>
+              <option value="21:30">21:30</option>
+              <option value="22:00">22:00</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-2">
+            <label class="text-[10px] uppercase tracking-widest2 text-bark" for="r-guests" data-i18n="rezervare.guests">
+              Persoane
+            </label>
+            <select id="r-guests" name="guests"
+                    class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
+                           focus:outline-none focus:border-forest transition-colors appearance-none">
+              {% for n in "12345678" %}
+              <option value="{{ n }}">{{ n }} persoane</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <!-- Submit row -->
+        <div class="pt-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <button id="r-submit" type="submit"
+                  class="px-8 py-3 bg-forest text-cream text-[11px] uppercase tracking-widest2
+                         hover:bg-emerald-900 disabled:opacity-50 disabled:cursor-not-allowed
+                         transition-colors duration-200" data-i18n="rezervare.submit">
+            Trimite cererea
+          </button>
+          <p class="text-xs text-stone-400 font-light" data-i18n="rezervare.notice">
+            Veți fi contactat pentru confirmare în cel mai scurt timp.
+          </p>
+        </div>
+
+        <!-- Inline error message (hidden by default) -->
+        <p id="r-error" class="hidden text-xs text-red-600 pt-1"></p>
+
+      </form>
+    </div><!-- /rezervare-form-wrap -->
+
+    <!-- ── Success message (shown after successful submission) ────────── -->
+    <div id="rezervare-success" class="hidden py-8">
+
+      <!-- Yellow diamond rule -->
+      <div class="flex items-center mb-10">
+        <span class="h-px flex-1 bg-stone-200"></span>
+        <svg class="mx-4 shrink-0" width="12" height="12" viewBox="0 0 10 10" aria-hidden="true">
+          <polygon points="5,0 10,5 5,10 0,5" fill="#facc15"/>
+        </svg>
+        <span class="h-px flex-1 bg-stone-200"></span>
+      </div>
+
+      <!-- Checkmark badge -->
+      <div class="flex justify-center mb-8">
+        <div class="w-16 h-16 bg-yellow-400/15 border border-yellow-400/40 flex items-center justify-center">
+          <svg class="w-7 h-7 text-forest" fill="none" stroke="currentColor"
+               stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+          </svg>
         </div>
       </div>
 
-      <!-- Date + Time + Guests -->
-      <div class="grid sm:grid-cols-3 gap-6">
-        <div class="flex flex-col gap-2">
-          <label class="text-[10px] uppercase tracking-widest2 text-bark" for="r-date" data-i18n="rezervare.date">
-            Data
-          </label>
-          <input id="r-date" name="date" type="date" required
-                 class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
-                        focus:outline-none focus:border-forest transition-colors" />
-        </div>
-        <div class="flex flex-col gap-2">
-          <label class="text-[10px] uppercase tracking-widest2 text-bark" for="r-time" data-i18n="rezervare.time">
-            Ora
-          </label>
-          <input id="r-time" name="time" type="time" required
-                 class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
-                        focus:outline-none focus:border-forest transition-colors" />
-        </div>
-        <div class="flex flex-col gap-2">
-          <label class="text-[10px] uppercase tracking-widest2 text-bark" for="r-guests" data-i18n="rezervare.guests">
-            Persoane
-          </label>
-          <select id="r-guests" name="guests"
-                  class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
-                         focus:outline-none focus:border-forest transition-colors appearance-none">
-            {% for n in "12345678" %}
-            <option value="{{ n }}">{{ n }} persoane</option>
-            {% endfor %}
-          </select>
-        </div>
+      <!-- RO message -->
+      <p class="font-serif text-forest text-xl sm:text-2xl leading-relaxed text-center mb-6 max-w-md mx-auto">
+        Rezervarea ta a fost creată și va fi confirmată printr-un mesaj în cel mai scurt timp posibil.
+      </p>
+
+      <!-- Thin separator -->
+      <div class="flex justify-center mb-6">
+        <span class="block w-8 h-0.5 bg-yellow-400"></span>
       </div>
 
-      <!-- Submit -->
-      <div class="pt-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-        <button type="submit"
-                class="px-8 py-3 bg-forest text-cream text-[11px] uppercase tracking-widest2
-                       hover:bg-emerald-900 transition-colors duration-200" data-i18n="rezervare.submit">
-          Confirmă rezervarea
-        </button>
-        <p class="text-xs text-stone-400 font-light" data-i18n="rezervare.notice">
-          Vă vom contacta pentru confirmare în cel mai scurt timp.
-        </p>
-      </div>
+      <!-- EN message -->
+      <p class="text-stone-400 text-sm italic leading-relaxed text-center max-w-md mx-auto">
+        Your reservation request has been received and will be confirmed via message as soon as possible.
+      </p>
 
-    </form>
+    </div><!-- /rezervare-success -->
 
-    <!-- Decorative folk-art mini-rule below form -->
+    <!-- Decorative folk-art mini-rule at panel bottom -->
     <div class="mt-16 flex items-center gap-3">
       <span class="h-px flex-1 bg-stone-200"></span>
       <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
@@ -529,37 +691,6 @@
       <h2 class="font-serif text-3xl sm:text-4xl text-forest">Evenimente</h2>
       <span class="flex-1 h-px self-center bg-stone-100"></span>
       <p class="text-[10px] uppercase tracking-widest3 text-bark" data-i18n="events.subtitle">Spațiu disponibil</p>
-    </div>
-  </div>
-
-  <!-- Contact strip -->
-  <div class="max-w-7xl mx-auto px-6 lg:px-12 pb-8">
-    <div class="flex flex-col sm:flex-row sm:flex-wrap gap-y-3 sm:gap-x-8">
-      <span class="flex items-center gap-2 text-sm text-stone-500">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9c7e5a" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-          <circle cx="12" cy="9" r="2.5"/>
-        </svg>
-        <span data-i18n="events.location">Poiana Brașov, Brașov, România</span>
-      </span>
-      <span class="flex items-center gap-2 text-sm text-stone-500">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9c7e5a" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.7 11.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.58a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-        </svg>
-        +40 268 262 000
-      </span>
-      <a href="#" class="flex items-center gap-2 text-sm text-stone-500 hover:text-[#E1306C] transition-colors" aria-label="Instagram">
-        <i class="fab fa-instagram" style="font-size:15px; color:#9c7e5a"></i>
-        @restaurant.vanatorul
-      </a>
-      <a href="mailto:Office@restaurant-vanatorul.ro"
-         class="flex items-center gap-2 text-sm text-stone-500 hover:text-forest transition-colors">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9c7e5a" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <rect x="2" y="4" width="20" height="16" rx="2"/>
-          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-        </svg>
-        Office@restaurant-vanatorul.ro
-      </a>
     </div>
   </div>
 
@@ -625,15 +756,234 @@
           <p class="text-xs text-stone-400 mt-1">Grădina de Vară · 70</p>
         </div>
       </div>
-      <a href="mailto:Office@restaurant-vanatorul.ro"
-         class="shrink-0 px-6 py-3 border border-forest text-forest text-[11px] uppercase tracking-widest2
-                hover:bg-forest hover:text-cream transition-colors duration-200 min-h-[44px] flex items-center" data-i18n="events.offer">
+      <a href="#ev-inquiry"
+         class="shrink-0 px-6 py-3 bg-forest text-cream text-[11px] uppercase tracking-widest2
+                hover:bg-emerald-900 transition-colors duration-200 min-h-[44px] flex items-center" data-i18n="events.offer">
         Solicită ofertă
       </a>
     </div>
 
+    <!-- Contact strip -->
+    <div class="mt-8 pt-8 border-t border-stone-100">
+      <div class="flex flex-col sm:flex-row sm:flex-wrap gap-y-3 sm:gap-x-8">
+        <span class="flex items-center gap-2 text-sm text-stone-500">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9c7e5a" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+          <span data-i18n="events.location">Poiana Brașov, Brașov, România</span>
+        </span>
+        <span class="flex items-center gap-2 text-sm text-stone-500">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9c7e5a" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.7 11.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.58a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          +40 268 262 000
+        </span>
+        <a href="#" class="flex items-center gap-2 text-sm text-stone-500 hover:text-[#E1306C] transition-colors" aria-label="Instagram">
+          <i class="fab fa-instagram" style="font-size:15px; color:#9c7e5a"></i>
+          @restaurant.vanatorul
+        </a>
+        <a href="mailto:Office@restaurant-vanatorul.ro"
+           class="flex items-center gap-2 text-sm text-stone-500 hover:text-forest transition-colors">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9c7e5a" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+          Office@restaurant-vanatorul.ro
+        </a>
+      </div>
+    </div>
+
   </div><!-- /container -->
 </section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     EVENT INQUIRY FORM
+     Scroll target for the "Solicită ofertă" button above.
+═══════════════════════════════════════════════════════════════════════ -->
+<div id="ev-inquiry" class="bg-cream border-t border-stone-200 scroll-mt-16">
+  <div class="max-w-2xl mx-auto px-6 lg:px-12 py-12 md:py-20">
+
+    <!-- Header -->
+    <div class="mb-12">
+      <p class="text-[10px] uppercase tracking-widest3 text-bark mb-3">
+        Poiana Brașov · Restaurant Vânătorul
+      </p>
+      <div class="flex items-baseline gap-6 border-b border-stone-200 pb-5">
+        <h2 class="font-serif text-3xl sm:text-4xl text-forest">Solicită o Ofertă</h2>
+        <span class="flex-1 h-px self-center bg-stone-100"></span>
+      </div>
+    </div>
+
+    <!-- ── Form wrap (hidden on success) ──────────────────────────────── -->
+    <div id="ev-form-wrap">
+      <form id="ev-form" class="space-y-8"
+            action="{% url 'event_inquiry' %}" method="post">
+        {% csrf_token %}
+
+        <!-- Name + Phone -->
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div class="flex flex-col gap-2">
+            <label class="text-[10px] uppercase tracking-widest2 text-bark" for="ev-name">
+              Nume complet
+            </label>
+            <input id="ev-name" name="name" type="text" required
+                   placeholder="Ion Popescu"
+                   class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
+                          placeholder:text-stone-300 focus:outline-none focus:border-forest
+                          transition-colors" />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label class="text-[10px] uppercase tracking-widest2 text-bark" for="ev-phone">
+              Telefon
+            </label>
+            <input id="ev-phone" name="phone" type="tel" required
+                   placeholder="+40 7xx xxx xxx"
+                   class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
+                          placeholder:text-stone-300 focus:outline-none focus:border-forest
+                          transition-colors" />
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="flex flex-col gap-2">
+          <label class="text-[10px] uppercase tracking-widest2 text-bark" for="ev-email">
+            Email
+          </label>
+          <input id="ev-email" name="email" type="email" required
+                 placeholder="ion.popescu@email.com"
+                 class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
+                        placeholder:text-stone-300 focus:outline-none focus:border-forest
+                        transition-colors" />
+        </div>
+
+        <!-- Desired Date + Event Type -->
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div class="flex flex-col gap-2">
+            <label class="text-[10px] uppercase tracking-widest2 text-bark" for="ev-date">
+              Data dorită
+            </label>
+            <input id="ev-date" name="desired_date" type="date" required
+                   class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
+                          focus:outline-none focus:border-forest transition-colors" />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label class="text-[10px] uppercase tracking-widest2 text-bark" for="ev-type">
+              Tip eveniment
+            </label>
+            <select id="ev-type" name="event_type" required
+                    class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
+                           focus:outline-none focus:border-forest transition-colors appearance-none">
+              <option value="" disabled selected>Selectează…</option>
+              <option value="wedding">Nuntă</option>
+              <option value="corporate">Corporate</option>
+              <option value="party">Petrecere Privată</option>
+              <option value="other">Altceva</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Estimated Guests -->
+        <div class="flex flex-col gap-2 sm:w-1/2">
+          <label class="text-[10px] uppercase tracking-widest2 text-bark" for="ev-guests">
+            Număr estimat de persoane
+          </label>
+          <input id="ev-guests" name="estimated_guests" type="number"
+                 min="1" max="1000" required
+                 placeholder="ex. 120"
+                 class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
+                        placeholder:text-stone-300 focus:outline-none focus:border-forest
+                        transition-colors" />
+        </div>
+
+        <!-- Message / Special Requirements -->
+        <div class="flex flex-col gap-2">
+          <label class="text-[10px] uppercase tracking-widest2 text-bark" for="ev-message">
+            Detalii și cerințe speciale
+            <span class="text-stone-400 normal-case tracking-normal ml-1">(opțional)</span>
+          </label>
+          <textarea id="ev-message" name="message" rows="4"
+                    placeholder="Meniu preferat, aranjamente, cerințe specifice…"
+                    class="border border-stone-200 bg-transparent p-3 text-sm text-forest
+                           placeholder:text-stone-300 focus:outline-none focus:border-forest
+                           transition-colors resize-none"></textarea>
+        </div>
+
+        <!-- Submit row -->
+        <div class="pt-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <button id="ev-submit" type="submit"
+                  class="px-8 py-3 bg-forest text-cream text-[11px] uppercase tracking-widest2
+                         hover:bg-emerald-900 disabled:opacity-50 disabled:cursor-not-allowed
+                         transition-colors duration-200">
+            Trimite cererea
+          </button>
+          <p class="text-xs text-stone-400 font-light">
+            Vă vom contacta pentru a discuta detaliile evenimentului.
+          </p>
+        </div>
+
+        <!-- Inline error (hidden by default) -->
+        <p id="ev-error" class="hidden text-xs text-red-600 pt-1"></p>
+
+      </form>
+    </div><!-- /ev-form-wrap -->
+
+    <!-- ── Success message (shown after successful submission) ─────────── -->
+    <div id="ev-success" class="hidden py-8">
+
+      <!-- Yellow diamond rule -->
+      <div class="flex items-center mb-10">
+        <span class="h-px flex-1 bg-stone-200"></span>
+        <svg class="mx-4 shrink-0" width="12" height="12" viewBox="0 0 10 10" aria-hidden="true">
+          <polygon points="5,0 10,5 5,10 0,5" fill="#facc15"/>
+        </svg>
+        <span class="h-px flex-1 bg-stone-200"></span>
+      </div>
+
+      <!-- Checkmark badge -->
+      <div class="flex justify-center mb-8">
+        <div class="w-16 h-16 bg-yellow-400/15 border border-yellow-400/40
+                    flex items-center justify-center">
+          <svg class="w-7 h-7 text-forest" fill="none" stroke="currentColor"
+               stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- RO message -->
+      <p class="font-serif text-forest text-xl sm:text-2xl leading-relaxed text-center
+                mb-6 max-w-md mx-auto">
+        Cererea ta a fost trimisă cu succes. Te vom contacta în cel mai scurt timp
+        pentru a discuta detaliile evenimentului tău.
+      </p>
+
+      <!-- Thin separator -->
+      <div class="flex justify-center mb-6">
+        <span class="block w-8 h-0.5 bg-yellow-400"></span>
+      </div>
+
+      <!-- EN message -->
+      <p class="text-stone-400 text-sm italic leading-relaxed text-center max-w-md mx-auto">
+        Your inquiry has been successfully sent. We will contact you shortly
+        to discuss the details of your event.
+      </p>
+
+    </div><!-- /ev-success -->
+
+    <!-- Decorative folk-art mini-rule at section bottom -->
+    <div class="mt-16 flex items-center gap-3">
+      <span class="h-px flex-1 bg-stone-200"></span>
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+        <polygon points="5,0 10,5 5,10 0,5" fill="#facc15"/>
+      </svg>
+      <span class="h-px flex-1 bg-stone-200"></span>
+    </div>
+
+  </div>
+</div><!-- /ev-inquiry -->
+
 </div><!-- /panel-evenimente -->
 
 
@@ -758,6 +1108,194 @@
       }
     });
   });
+})();
+</script>
+
+<script>
+// ── Reservation form — async Fetch submission ────────────────────────────
+(function () {
+  const form    = document.getElementById('rezervare-form');
+  if (!form) return;
+
+  const wrap    = document.getElementById('rezervare-form-wrap');
+  const success = document.getElementById('rezervare-success');
+  const errorEl = document.getElementById('r-error');
+  const btn     = document.getElementById('r-submit');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    errorEl.classList.add('hidden');
+    errorEl.textContent = '';
+
+    const origLabel   = btn.textContent.trim();
+    btn.disabled      = true;
+    btn.textContent   = '…';
+
+    const body   = new FormData(form);
+    const csrf   = body.get('csrfmiddlewaretoken') || '';
+
+    try {
+      const res  = await fetch(form.action, {
+        method:  'POST',
+        body,
+        headers: { 'X-CSRFToken': csrf },
+      });
+
+      let data;
+      try { data = await res.json(); }
+      catch (_) { data = { ok: false, error: 'Răspuns invalid de la server.' }; }
+
+      if (data.ok) {
+        wrap.classList.add('hidden');
+        success.classList.remove('hidden');
+        // Scroll smoothly to the success message
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        errorEl.textContent = data.error || 'A apărut o eroare. Vă rugăm încercați din nou.';
+        errorEl.classList.remove('hidden');
+        btn.disabled    = false;
+        btn.textContent = origLabel;
+      }
+    } catch (_) {
+      errorEl.textContent = 'Eroare de rețea. Vă rugăm verificați conexiunea și reîncercați.';
+      errorEl.classList.remove('hidden');
+      btn.disabled    = false;
+      btn.textContent = origLabel;
+    }
+  });
+})();
+
+// ── Event Inquiry form — async Fetch submission ──────────────────────────
+(function () {
+  const form    = document.getElementById('ev-form');
+  if (!form) return;
+
+  const wrap    = document.getElementById('ev-form-wrap');
+  const success = document.getElementById('ev-success');
+  const errorEl = document.getElementById('ev-error');
+  const btn     = document.getElementById('ev-submit');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    errorEl.classList.add('hidden');
+    errorEl.textContent = '';
+
+    const origLabel = btn.textContent.trim();
+    btn.disabled    = true;
+    btn.textContent = '…';
+
+    const body = new FormData(form);
+    const csrf = body.get('csrfmiddlewaretoken') || '';
+
+    try {
+      const res = await fetch(form.action, {
+        method:  'POST',
+        body,
+        headers: { 'X-CSRFToken': csrf },
+      });
+
+      let data;
+      try { data = await res.json(); }
+      catch (_) { data = { ok: false, error: 'Răspuns invalid de la server.' }; }
+
+      if (data.ok) {
+        wrap.classList.add('hidden');
+        success.classList.remove('hidden');
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        errorEl.textContent = data.error || 'A apărut o eroare. Vă rugăm încercați din nou.';
+        errorEl.classList.remove('hidden');
+        btn.disabled    = false;
+        btn.textContent = origLabel;
+      }
+    } catch (_) {
+      errorEl.textContent = 'Eroare de rețea. Vă rugăm verificați conexiunea și reîncercați.';
+      errorEl.classList.remove('hidden');
+      btn.disabled    = false;
+      btn.textContent = origLabel;
+    }
+  });
+})();
+
+// ── Two-tier menu tab filter ─────────────────────────────────────────────
+(function () {
+  // Remember the last active sub-category for each main category
+  const lastSub = {
+    mancare: null,
+    bautura: null,
+  };
+
+  // Resolve the first available sub-category from the rendered DOM
+  function firstAvailableSub(main) {
+    const block = document.querySelector('.menu-cat-block[data-main-cat="' + main + '"]');
+    return block ? block.dataset.subCat : null;
+  }
+
+  lastSub.mancare = firstAvailableSub('mancare') || 'antreuri';
+  lastSub.bautura = firstAvailableSub('bautura') || 'racoritoare';
+
+  // ── Apply main-tab visual state ────────────────────────────────────────
+  function applyMainStyles(activeMain) {
+    document.querySelectorAll('.menu-main-tab').forEach(btn => {
+      const on = btn.dataset.main === activeMain;
+      btn.classList.toggle('text-forest',        on);
+      btn.classList.toggle('font-semibold',      on);
+      btn.classList.toggle('border-forest',      on);
+      btn.classList.toggle('text-stone-400',     !on);
+      btn.classList.toggle('border-transparent', !on);
+    });
+
+    // Show the matching tier-2 row, hide the other
+    document.getElementById('sub-nav-mancare').classList.toggle('hidden', activeMain !== 'mancare');
+    document.getElementById('sub-nav-bautura').classList.toggle('hidden', activeMain !== 'bautura');
+  }
+
+  // ── Apply sub-tab visual state + show correct category block ──────────
+  function applySubStyles(activeMain, activeSub) {
+    // Style only the buttons inside the visible sub-nav
+    document.querySelectorAll('#sub-nav-' + activeMain + ' .menu-sub-tab').forEach(btn => {
+      const on = btn.dataset.sub === activeSub;
+      // Active pill: solid forest green
+      btn.classList.toggle('bg-forest',        on);
+      btn.classList.toggle('text-cream',       on);
+      btn.classList.toggle('font-medium',      on);
+      // Inactive pill: muted outline
+      btn.classList.toggle('text-stone-500',   !on);
+      btn.classList.toggle('border',           !on);
+      btn.classList.toggle('border-stone-200', !on);
+    });
+
+    // Show only the matching category block
+    document.querySelectorAll('.menu-cat-block').forEach(block => {
+      const show = block.dataset.mainCat === activeMain &&
+                   block.dataset.subCat  === activeSub;
+      block.classList.toggle('hidden', !show);
+    });
+  }
+
+  // ── Master switch ──────────────────────────────────────────────────────
+  function showCategory(main, sub) {
+    lastSub[main] = sub;
+    applyMainStyles(main);
+    applySubStyles(main, sub);
+  }
+
+  // ── Wire up main-tier buttons ──────────────────────────────────────────
+  document.querySelectorAll('.menu-main-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      showCategory(btn.dataset.main, lastSub[btn.dataset.main]);
+    });
+  });
+
+  // ── Wire up sub-tier buttons ───────────────────────────────────────────
+  document.querySelectorAll('.menu-sub-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      showCategory(btn.dataset.main, btn.dataset.sub);
+    });
+  });
+
+  // ── Initialise: default to Mâncare → Antreuri ─────────────────────────
+  showCategory('mancare', lastSub.mancare);
 })();
 </script>
 {% endblock %}

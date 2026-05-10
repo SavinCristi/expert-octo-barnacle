@@ -1,17 +1,27 @@
 from django.contrib import admin
 
-from .models import MenuItem, Reservation
+from .models import EventInquiry, MenuItem, Reservation
 
 
 @admin.register(MenuItem)
 class MenuItemAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'price', 'weight')
-    list_filter = ('category',)
+    list_display  = ('name', 'category', 'price', 'weight')
+    list_filter   = ('category',)
     search_fields = ('name',)
 
 
 @admin.register(Reservation)
 class ReservationAdmin(admin.ModelAdmin):
-    list_display = ('name', 'phone', 'date', 'time', 'guests')
-    list_filter = ('date',)
-    search_fields = ('name', 'phone')
+    list_display  = ('name', 'phone', 'email', 'date', 'time', 'guests', 'status')
+    list_filter   = ('status', 'date')
+    search_fields = ('name', 'phone', 'email')
+    list_editable = ('status',)
+
+
+@admin.register(EventInquiry)
+class EventInquiryAdmin(admin.ModelAdmin):
+    list_display   = ('name', 'event_type', 'desired_date', 'estimated_guests', 'status', 'created_at')
+    list_filter    = ('status', 'event_type')
+    search_fields  = ('name', 'phone', 'email')
+    list_editable  = ('status',)
+    readonly_fields = ('created_at',)
