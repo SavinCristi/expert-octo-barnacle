@@ -344,6 +344,16 @@
         'hero.tag3': 'Vânat Proaspăt',
         'meniu.subtitle': 'Bucătăria noastră',
         'meniu.empty': 'Meniul nu este disponibil momentan.',
+        'menu.items': 'preparate',
+        'tab.mancare': 'Mâncare', 'tab.bautura': 'Băutură',
+        'tab.antreuri': 'Antreuri', 'tab.ciorbe': 'Ciorbe',
+        'tab.feluri-principale': 'Feluri Principale', 'tab.garnituri': 'Garnituri',
+        'tab.salate': 'Salate', 'tab.deserturi': 'Deserturi',
+        'tab.racoritoare': 'Răcoritoare', 'tab.energizante': 'Energizante',
+        'tab.cafea-ceai': 'Cafea & Ceai', 'tab.bere': 'Bere',
+        'tab.alcool': 'Alcool', 'tab.vin-spumant': 'Vin Spumant',
+        'tab.vinuri-roze': 'Vinuri Roze', 'tab.vinuri-albe': 'Vinuri Albe',
+        'tab.vinuri-rosii': 'Vinuri Roșii',
         'rezervare.location': 'Poiana Brașov · Restaurant Vânătorul',
         'rezervare.title': 'Rezervă masă', 'rezervare.name': 'Nume complet',
         'rezervare.phone': 'Telefon', 'rezervare.email': 'Email',
@@ -385,6 +395,16 @@
         'hero.tag3': 'Fresh Game',
         'meniu.subtitle': 'Our Kitchen',
         'meniu.empty': 'The menu is not available at the moment.',
+        'menu.items': 'items',
+        'tab.mancare': 'Food', 'tab.bautura': 'Drinks',
+        'tab.antreuri': 'Starters', 'tab.ciorbe': 'Soups',
+        'tab.feluri-principale': 'Main Courses', 'tab.garnituri': 'Sides',
+        'tab.salate': 'Salads', 'tab.deserturi': 'Desserts',
+        'tab.racoritoare': 'Soft Drinks', 'tab.energizante': 'Energy Drinks',
+        'tab.cafea-ceai': 'Coffee & Tea', 'tab.bere': 'Beer',
+        'tab.alcool': 'Spirits', 'tab.vin-spumant': 'Sparkling Wine',
+        'tab.vinuri-roze': 'Rosé Wines', 'tab.vinuri-albe': 'White Wines',
+        'tab.vinuri-rosii': 'Red Wines',
         'rezervare.location': 'Poiana Brașov · Restaurant Vânătorul',
         'rezervare.title': 'Reserve a table', 'rezervare.name': 'Full name',
         'rezervare.phone': 'Phone', 'rezervare.email': 'Email',
@@ -420,6 +440,7 @@
       });
       localStorage.setItem('lang', lang);
       document.documentElement.lang = lang;
+      document.dispatchEvent(new CustomEvent('langchange', { detail: lang }));
     }
 
     setLang(localStorage.getItem('lang') || 'ro');

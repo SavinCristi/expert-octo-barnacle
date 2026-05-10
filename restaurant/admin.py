@@ -5,9 +5,14 @@ from .models import EventInquiry, MenuItem, Reservation
 
 @admin.register(MenuItem)
 class MenuItemAdmin(admin.ModelAdmin):
-    list_display  = ('name', 'category', 'price', 'weight')
+    list_display  = ('name', 'name_en', 'category', 'price', 'weight')
     list_filter   = ('category',)
-    search_fields = ('name',)
+    search_fields = ('name', 'name_en')
+    fieldsets = (
+        (None, {'fields': ('category', 'price', 'weight', 'image')}),
+        ('Romanian', {'fields': ('name', 'description')}),
+        ('English', {'fields': ('name_en', 'description_en')}),
+    )
 
 
 @admin.register(Reservation)

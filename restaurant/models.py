@@ -3,7 +3,9 @@ from django.db import models
 
 class MenuItem(models.Model):
     name = models.CharField(max_length=200)
+    name_en = models.CharField(max_length=200, blank=True, default='')
     description = models.TextField(blank=True)
+    description_en = models.TextField(blank=True, default='')
     price = models.DecimalField(max_digits=8, decimal_places=2)
     weight = models.CharField(max_length=50)
     category = models.CharField(max_length=100)
