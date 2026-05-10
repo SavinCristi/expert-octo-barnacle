@@ -1,0 +1,763 @@
+{% extends "base.html" %}
+
+{% block title %}Restaurant Vânătorul · Poiana Brașov{% endblock %}
+
+{% block content %}
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     MOUNTAIN BANNER  —  full-width panoramic SVG at the very top
+═══════════════════════════════════════════════════════════════════════ -->
+<div class="w-full overflow-hidden border-b border-stone-300/60">
+  <svg xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 1200 200"
+       preserveAspectRatio="xMidYMid slice"
+       style="display:block; width:100%; height:clamp(130px,18vw,200px)"
+       aria-hidden="true">
+    <defs>
+      <clipPath id="cp-banner">
+        <rect width="1200" height="200"/>
+      </clipPath>
+    </defs>
+
+    <!-- Sky -->
+    <rect width="1200" height="200" fill="#faf8f5"/>
+
+    <!-- Yellow sun arc rising at the horizon -->
+    <circle cx="600" cy="200" r="95"
+            fill="#facc15" opacity="0.72" clip-path="url(#cp-banner)"/>
+
+    <!-- Layer 1 — farthest range, ghost (9 % opacity) -->
+    <polygon
+      points="0,200 0,118 90,52 200,98 320,38 445,84 560,44 670,76 790,30 910,74 1020,40 1130,80 1200,62 1200,200"
+      fill="#0d3320" opacity="0.09"/>
+
+    <!-- Layer 2 — mid-distance ridge (22 % opacity) -->
+    <polygon
+      points="0,200 0,148 75,118 165,140 260,102 360,128 460,94 560,118 660,98 760,124 860,90 960,118 1055,100 1150,130 1200,114 1200,200"
+      fill="#0d3320" opacity="0.22"/>
+
+    <!-- Layer 3 — nearest ridge, full opacity, defines the skyline -->
+    <polygon
+      points="0,200 0,164 55,150 105,168 150,136 195,162 240,128 282,158 322,130 368,162 408,136 452,166 494,140 538,168 578,142 618,166 660,140 705,166 748,144 793,168 836,142 882,168 924,146 970,168 1012,146 1056,168 1098,148 1144,168 1200,150 1200,200"
+      fill="#0d3320"/>
+
+    <!-- Yellow snow caps on five prominent peaks -->
+    <polygon points="150,136 160,152 140,152" fill="#facc15" opacity="0.90"/>
+    <polygon points="322,130 333,147 311,147" fill="#facc15" opacity="0.82"/>
+    <polygon points="578,142 590,159 566,159" fill="#facc15" opacity="0.90"/>
+    <polygon points="836,142 848,159 824,159" fill="#facc15" opacity="0.82"/>
+    <polygon points="1098,148 1109,164 1087,164" fill="#facc15" opacity="0.70"/>
+
+    <!-- Horizon rule -->
+    <line x1="0" y1="200" x2="1200" y2="200" stroke="#0d3320" stroke-width="1"/>
+  </svg>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     GROUP VERTICALS BAR  —  5 buttons, icon-left, mobile-first
+═══════════════════════════════════════════════════════════════════════ -->
+<div class="w-full bg-cream border-b border-stone-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-4 sm:py-5">
+
+    <!-- Mobile: 2-col grid (Roua full-width on row 3)  |  md+: single flex row centered -->
+    <div class="grid grid-cols-2 md:flex md:flex-wrap md:justify-center gap-2">
+
+      <!-- ── 1. Meniu (mobile label) / Explorează Meniu (desktop) ── -->
+      <button data-show-panel="panel-meniu"
+              class="group flex items-center gap-2.5 px-3 py-3 sm:px-4
+                     border border-stone-200 bg-cream
+                     hover:border-forest/40 hover:bg-yellow-50/50
+                     transition-all duration-200 cursor-pointer justify-center
+                     min-h-[48px] w-full md:w-auto">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20"
+             class="shrink-0" aria-hidden="true">
+          <polygon points="0,42 10,28 20,36 32,22 48,36 48,42" fill="#0d3320" opacity="0.1"/>
+          <polygon points="6,42 24,8 42,42" fill="#0d3320"/>
+          <polygon points="21,12 24,7 27,12" fill="#facc15"/>
+          <line x1="4" y1="42" x2="44" y2="42" stroke="#0d3320" stroke-width="0.5" opacity="0.2"/>
+        </svg>
+        <span class="md:hidden text-[10px] uppercase tracking-widest2 text-forest
+                     group-hover:text-bark transition-colors leading-tight" data-i18n="vert.menu.mobile">Meniu</span>
+        <span class="hidden md:inline text-[10px] uppercase tracking-widest2 text-forest
+                     group-hover:text-bark transition-colors leading-tight" data-i18n="vert.menu.desktop">Explorează Meniu</span>
+      </button>
+
+      <!-- ── 2. Rezervă Masă ── -->
+      <button data-show-panel="panel-rezervare"
+              class="group flex items-center gap-2.5 px-3 py-3 sm:px-4
+                     border border-stone-200 bg-cream
+                     hover:border-forest/40 hover:bg-yellow-50/50
+                     transition-all duration-200 cursor-pointer justify-center
+                     min-h-[48px] w-full md:w-auto">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20"
+             class="shrink-0" aria-hidden="true">
+          <polygon points="0,42 10,28 20,36 32,22 48,36 48,42" fill="#0d3320" opacity="0.1"/>
+          <polygon points="6,42 24,8 42,42" fill="#0d3320"/>
+          <polygon points="21,12 24,7 27,12" fill="#facc15"/>
+          <line x1="4" y1="42" x2="44" y2="42" stroke="#0d3320" stroke-width="0.5" opacity="0.2"/>
+        </svg>
+        <span class="text-[10px] uppercase tracking-widest2 text-forest
+                     group-hover:text-bark transition-colors leading-tight" data-i18n="vert.book">
+          Rezervă Masă
+        </span>
+      </button>
+
+      <!-- ── 3. Evenimente ── -->
+      <button data-show-panel="panel-evenimente"
+              class="group flex items-center gap-2.5 px-3 py-3 sm:px-4
+                     border border-stone-200 bg-cream
+                     hover:border-forest/40 hover:bg-yellow-50/50
+                     transition-all duration-200 cursor-pointer justify-center
+                     min-h-[48px] w-full md:w-auto">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20"
+             class="shrink-0" aria-hidden="true">
+          <polygon points="0,42 10,28 20,36 32,22 48,36 48,42" fill="#0d3320" opacity="0.1"/>
+          <polygon points="6,42 24,8 42,42" fill="#0d3320"/>
+          <polygon points="21,12 24,7 27,12" fill="#facc15"/>
+          <line x1="4" y1="42" x2="44" y2="42" stroke="#0d3320" stroke-width="0.5" opacity="0.2"/>
+        </svg>
+        <span class="text-[10px] uppercase tracking-widest2 text-forest
+                     group-hover:text-bark transition-colors leading-tight" data-i18n="vert.events">
+          Evenimente
+        </span>
+      </button>
+
+      <!-- ── 4. Casa Emil (mobile label) / Cazare Casa Emil (desktop) ── -->
+      <div class="group relative w-full md:w-auto">
+        <a href="#" data-tooltip="tooltip-casaemil"
+           class="flex items-center gap-2.5 px-3 py-3 sm:px-4
+                  border border-stone-200 bg-cream
+                  hover:border-forest/40 hover:bg-yellow-50/50
+                  transition-all duration-200 justify-center
+                  min-h-[48px] w-full h-full">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20"
+               class="shrink-0" aria-hidden="true">
+            <polygon points="0,42 10,26 20,42"  fill="#0d3320" opacity="0.07"/>
+            <polygon points="28,42 38,22 48,42" fill="#0d3320" opacity="0.07"/>
+            <polygon points="5,42 8.5,31 12,42" fill="#0d3320" opacity="0.32"/>
+            <polygon points="36,42 39.5,31 43,42" fill="#0d3320" opacity="0.32"/>
+            <rect x="15" y="29" width="18" height="13" fill="#faf8f5" stroke="#0d3320" stroke-width="0.75"/>
+            <polygon points="11,29 24,8 37,29" fill="#0d3320"/>
+            <rect x="28" y="12" width="3.5" height="8"  fill="#9c7e5a"/>
+            <rect x="27" y="11" width="5.5" height="2"  fill="#9c7e5a"/>
+            <rect x="16" y="32" width="4.5" height="3.5" rx="0.5" fill="#facc15" opacity="0.9"/>
+            <rect x="27" y="32" width="4.5" height="3.5" rx="0.5" fill="#facc15" opacity="0.9"/>
+            <path d="M21,42 L21,36 Q24,34 27,36 L27,42 Z" fill="#9c7e5a"/>
+            <polygon points="22,10 24,7 26,10" fill="#facc15"/>
+            <line x1="4" y1="42" x2="44" y2="42" stroke="#0d3320" stroke-width="0.5" opacity="0.2"/>
+          </svg>
+          <span class="md:hidden text-[10px] uppercase tracking-widest2 text-forest
+                       group-hover:text-bark transition-colors leading-tight" data-i18n="vert.casa-emil.mobile">Casa Emil</span>
+          <span class="hidden md:inline text-[10px] uppercase tracking-widest2 text-forest
+                       group-hover:text-bark transition-colors leading-tight" data-i18n="vert.casa-emil.desktop">Cazare Casa Emil</span>
+        </a>
+        <span id="tooltip-casaemil"
+              class="absolute top-full mt-1 left-1/2 -translate-x-1/2 z-10
+                     text-[9px] tracking-wide italic text-bark whitespace-nowrap
+                     bg-cream px-2 py-0.5 border border-stone-100
+                     opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                     pointer-events-none">
+          Se redescide · Decembrie 2026
+        </span>
+      </div>
+
+      <!-- ── 5. Roua Speciality Coffee — full width on mobile (row 3), last ── -->
+      <div class="group relative w-full md:w-auto col-span-2 md:col-span-1">
+        <a href="#" data-tooltip="tooltip-roua"
+           class="flex items-center gap-2.5 px-3 py-3 sm:px-4
+                  border border-stone-200 bg-cream
+                  hover:border-forest/40 hover:bg-yellow-50/50
+                  transition-all duration-200 justify-center
+                  min-h-[48px] w-full h-full">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20"
+               class="shrink-0" aria-hidden="true">
+            <polygon points="0,42 10,28 20,36 32,22 48,36 48,42" fill="#0d3320" opacity="0.1"/>
+            <polygon points="6,42 24,8 42,42" fill="#0d3320"/>
+            <polygon points="21,12 24,7 27,12" fill="#facc15"/>
+            <line x1="4" y1="42" x2="44" y2="42" stroke="#0d3320" stroke-width="0.5" opacity="0.2"/>
+          </svg>
+          <span class="text-[10px] uppercase tracking-widest2 text-forest
+                       group-hover:text-bark transition-colors leading-tight">
+            Roua Speciality Coffee
+          </span>
+        </a>
+        <span id="tooltip-roua"
+              class="absolute top-full mt-1 left-1/2 -translate-x-1/2 z-10
+                     text-[9px] tracking-wide italic text-bark whitespace-nowrap
+                     bg-cream px-2 py-0.5 border border-stone-100
+                     opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                     pointer-events-none">
+          Din 13 Iunie 2026
+        </span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     HERO  —  text-driven, single column
+═══════════════════════════════════════════════════════════════════════ -->
+<section class="border-b border-stone-200 flex flex-col">
+
+  <!-- Hero text block -->
+  <div class="max-w-4xl mx-auto w-full flex flex-col items-center justify-center text-center
+              px-8 sm:px-12 lg:px-16 xl:px-24 pt-12 pb-20 lg:pt-16 lg:pb-28">
+
+    <!-- Display heading -->
+    <h1 class="font-serif font-bold leading-[0.88] text-forest mb-3
+               text-[clamp(3.5rem,11vw,9rem)]">
+      Vânătorul
+    </h1>
+
+    <!-- Subtitle: "Forest to Fork" at ~50% the H1 size -->
+    <p class="font-serif font-normal italic text-stone-400 mb-8 leading-tight
+              text-[clamp(1.4rem,4.5vw,3.8rem)]">
+      "Forest to Fork"
+    </p>
+
+    <!-- Yellow rule + tagline -->
+    <div class="flex items-center gap-4 mb-6">
+      <span class="block w-10 h-0.5 bg-yellow-400 shrink-0"></span>
+      <p class="text-stone-500 text-sm font-light italic" data-i18n="hero.tagline">
+        Bucătărie tradițională cu un gram de modernism
+      </p>
+      <span class="block w-10 h-0.5 bg-yellow-400 shrink-0"></span>
+    </div>
+
+    <p class="text-stone-500 text-base leading-relaxed max-w-sm mb-10 font-light" data-i18n="hero.desc">
+      Savurați preparate autentice și din vânat în spiritul ospitalității montane românești.
+    </p>
+
+    <!-- Heritage tagline -->
+    <p class="font-serif italic text-stone-400 text-lg tracking-wide" data-i18n="hero.heritage">
+      Povestea Continuă din 1975
+    </p>
+
+    <!-- Bottom meta strip -->
+    <div class="mt-auto pt-10 md:pt-16 flex flex-wrap justify-center gap-x-4 gap-y-1 text-[10px] uppercase tracking-widest2 text-stone-400">
+      <span data-i18n="hero.tag1">Est. Poiana Brașov</span>
+      <span class="text-yellow-400">◆</span>
+      <span data-i18n="hero.tag2">Bucătărie Modernă Autentică</span>
+      <span class="text-yellow-400">◆</span>
+      <span data-i18n="hero.tag3">Vânat Proaspăt</span>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     PANEL: MENIU  (hidden until the user clicks Meniu)
+═══════════════════════════════════════════════════════════════════════ -->
+<div id="panel-meniu" class="page-panel hidden">
+
+<!-- Folk art divider -->
+<div class="overflow-hidden border-b border-stone-200 bg-white">
+  <svg width="100%" height="36" viewBox="0 0 1200 36"
+       preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"
+       aria-hidden="true">
+    <defs>
+      <pattern id="brau-top" x="0" y="0" width="60" height="18"
+               patternUnits="userSpaceOnUse">
+        <polygon points="30,2 58,9 30,16 2,9"
+                 fill="none" stroke="#d6d3d1" stroke-width="0.75"/>
+        <polygon points="30,6 44,9 30,12 16,9" fill="#facc1540"/>
+        <line x1="0"  y1="9" x2="2"  y2="9" stroke="#d6d3d1" stroke-width="0.75"/>
+        <line x1="58" y1="9" x2="60" y2="9" stroke="#d6d3d1" stroke-width="0.75"/>
+        <circle cx="0"  cy="9" r="1.5" fill="#d6d3d1"/>
+        <circle cx="60" cy="9" r="1.5" fill="#d6d3d1"/>
+      </pattern>
+      <pattern id="brau-bot" x="0" y="0" width="60" height="18"
+               patternUnits="userSpaceOnUse">
+        <polygon points="30,2 58,9 30,16 2,9"
+                 fill="none" stroke="#e7e5e3" stroke-width="0.5"/>
+        <line x1="0"  y1="9" x2="2"  y2="9" stroke="#e7e5e3" stroke-width="0.5"/>
+        <line x1="58" y1="9" x2="60" y2="9" stroke="#e7e5e3" stroke-width="0.5"/>
+      </pattern>
+    </defs>
+    <rect y="0"  width="100%" height="18" fill="url(#brau-top)"/>
+    <rect y="18" width="100%" height="18" fill="url(#brau-bot)"/>
+  </svg>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     MENU
+═══════════════════════════════════════════════════════════════════════ -->
+<section id="meniu" class="bg-white">
+
+  <!-- Section header -->
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 pt-10 pb-6 md:pt-20 md:pb-12">
+    <div class="flex items-baseline gap-6 border-b border-stone-200 pb-6">
+      <h2 class="font-serif text-3xl sm:text-4xl text-forest">Meniu</h2>
+      <span class="flex-1 h-px self-center bg-stone-100"></span>
+      <p class="text-[10px] uppercase tracking-widest3 text-bark" data-i18n="meniu.subtitle">Bucătăria noastră</p>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 pb-16 md:pb-28 space-y-12 md:space-y-24">
+
+    {% for category, items in menu_sections %}
+
+    <!-- ── Category block ── -->
+    <div>
+
+      <!-- Category heading with folk-art diamond accent -->
+      <div class="flex items-center gap-5 mb-6 md:mb-10">
+        <h3 class="font-serif text-2xl sm:text-3xl text-forest whitespace-nowrap">
+          {{ category }}
+        </h3>
+        <!-- Inline folk-art micro-rule -->
+        <span class="flex items-center gap-1.5 flex-1 min-w-0">
+          <span class="h-px w-4 bg-stone-300 shrink-0"></span>
+          <svg width="10" height="10" viewBox="0 0 10 10" class="shrink-0" aria-hidden="true">
+            <polygon points="5,0 10,5 5,10 0,5" fill="#facc15"/>
+          </svg>
+          <span class="h-px flex-1 bg-stone-200"></span>
+          <svg width="6" height="6" viewBox="0 0 6 6" class="shrink-0" aria-hidden="true">
+            <polygon points="3,0 6,3 3,6 0,3" fill="#0d332040"/>
+          </svg>
+          <span class="h-px w-4 bg-stone-200 shrink-0"></span>
+        </span>
+        <span class="text-[10px] tracking-widest2 uppercase text-stone-400 shrink-0">
+          {{ items|length }} preparate
+        </span>
+      </div>
+
+      <!-- Items grid — CSS border trick for seamless table-style grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
+                  border-l border-t border-stone-200">
+        {% for item in items %}
+        <article class="border-r border-b border-stone-200 p-6
+                        group hover:bg-yellow-50/40 transition-colors duration-150
+                        flex flex-col">
+
+          {% if item.image %}
+          <div class="overflow-hidden -mx-6 -mt-6 mb-5 h-40">
+            <img src="{{ item.image.url }}" alt="{{ item.name }}"
+                 class="w-full h-full object-cover
+                        group-hover:scale-[1.03] transition-transform duration-500" />
+          </div>
+          {% endif %}
+
+          <!-- Item name -->
+          <h4 class="font-serif text-[15px] text-forest leading-snug mb-3
+                     group-hover:text-emerald-800 transition-colors">
+            {{ item.name }}
+          </h4>
+
+          {% if item.description %}
+          <p class="text-stone-400 text-xs leading-relaxed mb-3 line-clamp-2 flex-1">
+            {{ item.description }}
+          </p>
+          {% else %}
+          <div class="flex-1"></div>
+          {% endif %}
+
+          <!-- Price row -->
+          <div class="flex items-end justify-between pt-3 mt-auto
+                      border-t border-stone-100">
+            {% if item.weight %}
+            <span class="text-[11px] text-stone-400 tracking-wide">{{ item.weight }}</span>
+            {% else %}
+            <span></span>
+            {% endif %}
+
+            <div class="text-right leading-none">
+              <span class="font-serif text-xl text-yellow-500 font-semibold">
+                {{ item.price }}
+              </span>
+              <span class="text-xs text-stone-400 ml-1">lei</span>
+            </div>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+
+    </div><!-- /category block -->
+
+    {% empty %}
+    <p class="py-24 text-center text-stone-400" data-i18n="meniu.empty">Meniul nu este disponibil momentan.</p>
+    {% endfor %}
+
+  </div><!-- /menu container -->
+</section>
+
+</div><!-- /panel-meniu -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     PANEL: REZERVARE  (hidden until the user clicks Rezervare)
+═══════════════════════════════════════════════════════════════════════ -->
+<div id="panel-rezervare" class="page-panel hidden border-t border-stone-200">
+  <div class="max-w-2xl mx-auto px-6 lg:px-12 py-10 md:py-24">
+
+    <!-- Header -->
+    <div class="mb-14">
+      <p class="text-[10px] uppercase tracking-widest3 text-bark mb-3" data-i18n="rezervare.location">
+        Poiana Brașov · Restaurant Vânătorul
+      </p>
+      <div class="flex items-baseline gap-6">
+        <h2 class="font-serif text-3xl sm:text-4xl text-forest" data-i18n="rezervare.title">Rezervă masă</h2>
+        <span class="flex-1 h-px self-center bg-stone-200"></span>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form class="space-y-8" action="mailto:Office@restaurant-vanatorul.ro" method="get" enctype="text/plain">
+
+      <!-- Name + Phone -->
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div class="flex flex-col gap-2">
+          <label class="text-[10px] uppercase tracking-widest2 text-bark" for="r-name" data-i18n="rezervare.name">
+            Nume complet
+          </label>
+          <input id="r-name" name="name" type="text" required
+                 placeholder="Ion Popescu"
+                 class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
+                        placeholder:text-stone-300 focus:outline-none focus:border-forest
+                        transition-colors" />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-[10px] uppercase tracking-widest2 text-bark" for="r-phone" data-i18n="rezervare.phone">
+            Telefon
+          </label>
+          <input id="r-phone" name="phone" type="tel" required
+                 placeholder="+40 7xx xxx xxx"
+                 class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
+                        placeholder:text-stone-300 focus:outline-none focus:border-forest
+                        transition-colors" />
+        </div>
+      </div>
+
+      <!-- Date + Time + Guests -->
+      <div class="grid sm:grid-cols-3 gap-6">
+        <div class="flex flex-col gap-2">
+          <label class="text-[10px] uppercase tracking-widest2 text-bark" for="r-date" data-i18n="rezervare.date">
+            Data
+          </label>
+          <input id="r-date" name="date" type="date" required
+                 class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
+                        focus:outline-none focus:border-forest transition-colors" />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-[10px] uppercase tracking-widest2 text-bark" for="r-time" data-i18n="rezervare.time">
+            Ora
+          </label>
+          <input id="r-time" name="time" type="time" required
+                 class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
+                        focus:outline-none focus:border-forest transition-colors" />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-[10px] uppercase tracking-widest2 text-bark" for="r-guests" data-i18n="rezervare.guests">
+            Persoane
+          </label>
+          <select id="r-guests" name="guests"
+                  class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
+                         focus:outline-none focus:border-forest transition-colors appearance-none">
+            {% for n in "12345678" %}
+            <option value="{{ n }}">{{ n }} persoane</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div class="pt-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <button type="submit"
+                class="px-8 py-3 bg-forest text-cream text-[11px] uppercase tracking-widest2
+                       hover:bg-emerald-900 transition-colors duration-200" data-i18n="rezervare.submit">
+          Confirmă rezervarea
+        </button>
+        <p class="text-xs text-stone-400 font-light" data-i18n="rezervare.notice">
+          Vă vom contacta pentru confirmare în cel mai scurt timp.
+        </p>
+      </div>
+
+    </form>
+
+    <!-- Decorative folk-art mini-rule below form -->
+    <div class="mt-16 flex items-center gap-3">
+      <span class="h-px flex-1 bg-stone-200"></span>
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+        <polygon points="5,0 10,5 5,10 0,5" fill="#facc15"/>
+      </svg>
+      <span class="h-px flex-1 bg-stone-200"></span>
+    </div>
+
+  </div>
+</div><!-- /panel-rezervare -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     PANEL: EVENIMENTE
+═══════════════════════════════════════════════════════════════════════ -->
+<div id="panel-evenimente" class="page-panel hidden border-t border-stone-200">
+
+<!-- Folk art divider -->
+<div class="overflow-hidden border-b border-stone-200 bg-white">
+  <svg width="100%" height="36" viewBox="0 0 1200 36"
+       preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <pattern id="brau-top-ev" x="0" y="0" width="60" height="18" patternUnits="userSpaceOnUse">
+        <polygon points="30,2 58,9 30,16 2,9" fill="none" stroke="#d6d3d1" stroke-width="0.75"/>
+        <polygon points="30,6 44,9 30,12 16,9" fill="#facc1540"/>
+        <line x1="0" y1="9" x2="2" y2="9" stroke="#d6d3d1" stroke-width="0.75"/>
+        <line x1="58" y1="9" x2="60" y2="9" stroke="#d6d3d1" stroke-width="0.75"/>
+        <circle cx="0" cy="9" r="1.5" fill="#d6d3d1"/>
+        <circle cx="60" cy="9" r="1.5" fill="#d6d3d1"/>
+      </pattern>
+      <pattern id="brau-bot-ev" x="0" y="0" width="60" height="18" patternUnits="userSpaceOnUse">
+        <polygon points="30,2 58,9 30,16 2,9" fill="none" stroke="#e7e5e3" stroke-width="0.5"/>
+        <line x1="0" y1="9" x2="2" y2="9" stroke="#e7e5e3" stroke-width="0.5"/>
+        <line x1="58" y1="9" x2="60" y2="9" stroke="#e7e5e3" stroke-width="0.5"/>
+      </pattern>
+    </defs>
+    <rect y="0" width="100%" height="18" fill="url(#brau-top-ev)"/>
+    <rect y="18" width="100%" height="18" fill="url(#brau-bot-ev)"/>
+  </svg>
+</div>
+
+<section class="bg-white">
+
+  <!-- Section header -->
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 pt-10 pb-6 md:pt-20 md:pb-10">
+    <div class="flex items-baseline gap-6 border-b border-stone-200 pb-6">
+      <h2 class="font-serif text-3xl sm:text-4xl text-forest">Evenimente</h2>
+      <span class="flex-1 h-px self-center bg-stone-100"></span>
+      <p class="text-[10px] uppercase tracking-widest3 text-bark" data-i18n="events.subtitle">Spațiu disponibil</p>
+    </div>
+  </div>
+
+  <!-- Contact strip -->
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 pb-8">
+    <div class="flex flex-col sm:flex-row sm:flex-wrap gap-y-3 sm:gap-x-8">
+      <span class="flex items-center gap-2 text-sm text-stone-500">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9c7e5a" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+        <span data-i18n="events.location">Poiana Brașov, Brașov, România</span>
+      </span>
+      <span class="flex items-center gap-2 text-sm text-stone-500">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9c7e5a" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.7 11.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.58a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        +40 268 262 000
+      </span>
+      <a href="#" class="flex items-center gap-2 text-sm text-stone-500 hover:text-[#E1306C] transition-colors" aria-label="Instagram">
+        <i class="fab fa-instagram" style="font-size:15px; color:#9c7e5a"></i>
+        @restaurant.vanatorul
+      </a>
+      <a href="mailto:Office@restaurant-vanatorul.ro"
+         class="flex items-center gap-2 text-sm text-stone-500 hover:text-forest transition-colors">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9c7e5a" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+        Office@restaurant-vanatorul.ro
+      </a>
+    </div>
+  </div>
+
+  <!-- Venue cards -->
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 pb-16 md:pb-28">
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
+
+      <!-- ── Sala Mare — 90 locuri ── -->
+      <div class="border border-stone-200 bg-cream p-5 flex flex-col">
+        <h3 class="font-serif text-xl text-forest mb-1">Sala Mare</h3>
+        <p class="text-2xl font-bold text-forest mb-1">90 <span class="text-sm font-normal text-stone-400">locuri</span></p>
+        <p class="text-xs text-stone-400 font-light leading-relaxed mt-auto pt-3 border-t border-stone-100" data-i18n="events.sala-mare.desc">
+          Spațiu generos pentru banchete și ceremonii, cu luminatoare naturale și decor montan autentic.
+        </p>
+      </div>
+
+      <!-- ── Sala Mică — 60 locuri ── -->
+      <div class="border border-stone-200 bg-cream p-5 flex flex-col">
+        <h3 class="font-serif text-xl text-forest mb-1">Sala Mică</h3>
+        <p class="text-2xl font-bold text-forest mb-1">60 <span class="text-sm font-normal text-stone-400">locuri</span></p>
+        <p class="text-xs text-stone-400 font-light leading-relaxed mt-auto pt-3 border-t border-stone-100" data-i18n="events.sala-mica.desc">
+          Elegantă și intimă, ideală pentru conferințe, cine de afaceri sau reuniuni private.
+        </p>
+      </div>
+
+      <!-- ── Salonul Caprioarei — 36 locuri ── -->
+      <div class="border border-stone-200 bg-cream p-5 flex flex-col">
+        <h3 class="font-serif text-xl text-forest mb-1">Salonul Caprioarei</h3>
+        <p class="text-2xl font-bold text-forest mb-1">36 <span class="text-sm font-normal text-stone-400">locuri</span></p>
+        <p class="text-xs text-stone-400 font-light leading-relaxed mt-auto pt-3 border-t border-stone-100" data-i18n="events.salon-cap.desc">
+          Salon intim cu specific montan, ideal pentru celebrări speciale și mese de protocol.
+        </p>
+      </div>
+
+      <!-- ── Grădina de Vară — 70 locuri ── -->
+      <div class="border border-stone-200 bg-cream p-5 flex flex-col">
+        <h3 class="font-serif text-xl text-forest mb-1" data-i18n="events.gradina.title">Grădina de Vară</h3>
+        <p class="text-2xl font-bold text-forest mb-1">70 <span class="text-sm font-normal text-stone-400">locuri</span></p>
+        <p class="text-xs text-stone-400 font-light leading-relaxed mt-auto pt-3 border-t border-stone-100" data-i18n="events.gradina.desc">
+          Terasă în aer liber cu priveliște montană, pergolă acoperită și ambient natural pitoresc.
+        </p>
+      </div>
+
+    </div><!-- /grid -->
+
+    <!-- Capacity summary -->
+    <div class="border border-stone-200 bg-stone-50/50 p-5
+                flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+      <div class="flex flex-col sm:flex-row gap-6 sm:gap-12">
+        <div>
+          <p class="text-[10px] uppercase tracking-widest2 text-bark mb-1" data-i18n="events.interior">Număr Locuri Interior</p>
+          <p class="font-serif text-4xl text-forest leading-none">
+            186
+          </p>
+          <p class="text-xs text-stone-400 mt-1">Sala Mare · 90 &nbsp;·&nbsp; Sala Mică · 60 &nbsp;·&nbsp; Salonul Caprioarei · 36</p>
+        </div>
+        <div>
+          <p class="text-[10px] uppercase tracking-widest2 text-bark mb-1" data-i18n="events.exterior">Număr Locuri Exterior</p>
+          <p class="font-serif text-4xl text-forest leading-none">
+            70
+          </p>
+          <p class="text-xs text-stone-400 mt-1">Grădina de Vară · 70</p>
+        </div>
+      </div>
+      <a href="mailto:Office@restaurant-vanatorul.ro"
+         class="shrink-0 px-6 py-3 border border-forest text-forest text-[11px] uppercase tracking-widest2
+                hover:bg-forest hover:text-cream transition-colors duration-200 min-h-[44px] flex items-center" data-i18n="events.offer">
+        Solicită ofertă
+      </a>
+    </div>
+
+  </div><!-- /container -->
+</section>
+</div><!-- /panel-evenimente -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     STEAUA BANNER  —  full-width folk-art bottom divider
+═══════════════════════════════════════════════════════════════════════ -->
+<div class="w-full overflow-hidden border-t border-stone-200 bg-cream">
+  <svg xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 1200 100"
+       preserveAspectRatio="xMidYMid meet"
+       style="display:block; width:100%; height:clamp(70px,9vw,100px)"
+       aria-hidden="true">
+    <defs>
+      <pattern id="brau-steaua" x="0" y="0" width="40" height="20"
+               patternUnits="userSpaceOnUse">
+        <polygon points="20,2 38,10 20,18 2,10"
+                 fill="none" stroke="#d6d3d1" stroke-width="0.75"/>
+        <polygon points="20,6 28,10 20,14 12,10" fill="#facc1530"/>
+        <line x1="0"  y1="10" x2="2"  y2="10" stroke="#d6d3d1" stroke-width="0.75"/>
+        <line x1="38" y1="10" x2="40" y2="10" stroke="#d6d3d1" stroke-width="0.75"/>
+        <circle cx="0"  cy="10" r="1.2" fill="#d6d3d1"/>
+        <circle cx="40" cy="10" r="1.2" fill="#d6d3d1"/>
+      </pattern>
+    </defs>
+
+    <!-- Background -->
+    <rect width="1200" height="100" fill="#faf8f5"/>
+
+    <!-- Diamond-chain brâu — left arm (up to steaua gap) -->
+    <rect x="0" y="40" width="530" height="20" fill="url(#brau-steaua)"/>
+
+    <!-- Diamond-chain brâu — right arm -->
+    <rect x="670" y="40" width="530" height="20" fill="url(#brau-steaua)"/>
+
+    <!-- Connector lines flanking the steaua -->
+    <line x1="530" y1="50" x2="555" y2="50" stroke="#d6d3d1" stroke-width="0.75"/>
+    <line x1="645" y1="50" x2="670" y2="50" stroke="#d6d3d1" stroke-width="0.75"/>
+
+    <!-- Small yellow accent diamonds flanking steaua -->
+    <polygon points="555,44 563,50 555,56 547,50" fill="#facc15" opacity="0.7"/>
+    <polygon points="645,44 653,50 645,56 637,50" fill="#facc15" opacity="0.7"/>
+
+    <!-- ══ STEAUA — 8-pointed Transylvanian star, centred at (600,50) ════ -->
+    <g transform="translate(600 50)">
+      <circle cx="0" cy="0" r="38" stroke="#e7e5e3" stroke-width="0.5" fill="none"/>
+
+      <!-- Two overlapping squares forming 8-pointed star -->
+      <rect x="-26" y="-26" width="52" height="52"
+            stroke="#0d3320" stroke-width="1" fill="none"/>
+      <rect x="-26" y="-26" width="52" height="52"
+            stroke="#0d3320" stroke-width="1" fill="none"
+            transform="rotate(45)"/>
+
+      <!-- Cardinal tick marks -->
+      <line x1="0"   y1="-26" x2="0"   y2="-13" stroke="#0d3320" stroke-width="0.75"/>
+      <line x1="0"   y1="13"  x2="0"   y2="26"  stroke="#0d3320" stroke-width="0.75"/>
+      <line x1="-26" y1="0"   x2="-13" y2="0"   stroke="#0d3320" stroke-width="0.75"/>
+      <line x1="13"  y1="0"   x2="26"  y2="0"   stroke="#0d3320" stroke-width="0.75"/>
+
+      <!-- Inner smaller squares -->
+      <rect x="-13" y="-13" width="26" height="26"
+            stroke="#0d3320" stroke-width="0.75" fill="none"/>
+      <rect x="-13" y="-13" width="26" height="26"
+            stroke="#0d3320" stroke-width="0.75" fill="none"
+            transform="rotate(45)"/>
+
+      <!-- Central yellow diamond + dot -->
+      <polygon points="0,-9 9,0 0,9 -9,0" fill="#facc15"/>
+      <circle cx="0" cy="0" r="2.5" fill="#0d3320"/>
+
+      <!-- Yellow point caps on the 4 cardinal spikes -->
+      <polygon points="0,-30  3,-26  0,-22 -3,-26" fill="#facc15"/>
+      <polygon points="0,22   3,26   0,30  -3,26"  fill="#facc15"/>
+      <polygon points="-30,0 -26,-3 -22,0 -26,3"  fill="#facc15"/>
+      <polygon points="22,0   26,-3  30,0  26,3"   fill="#facc15"/>
+    </g>
+
+    <!-- Thin rule across the full width -->
+    <line x1="0" y1="50" x2="1200" y2="50" stroke="#e7e5e3" stroke-width="0.4"/>
+  </svg>
+</div>
+
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  // Tooltip click-to-show (for mobile where hover is unavailable)
+  document.querySelectorAll('[data-tooltip]').forEach(el => {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      const tip = document.getElementById(this.dataset.tooltip);
+      if (!tip) return;
+      tip.style.opacity = '1';
+      setTimeout(() => { tip.style.opacity = ''; }, 2500);
+    });
+  });
+})();
+
+(function () {
+  const triggers = document.querySelectorAll('[data-show-panel]');
+
+  function openPanel(id) {
+    document.querySelectorAll('.page-panel').forEach(p => p.classList.add('hidden'));
+    const panel = document.getElementById(id);
+    if (!panel) return;
+    panel.classList.remove('hidden');
+    const top = panel.getBoundingClientRect().top + window.scrollY - 56;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+
+  triggers.forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      const id = el.dataset.showPanel;
+      const panel = document.getElementById(id);
+      if (panel && !panel.classList.contains('hidden')) {
+        panel.classList.add('hidden');
+      } else {
+        openPanel(id);
+      }
+    });
+  });
+})();
+</script>
+{% endblock %}

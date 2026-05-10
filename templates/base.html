@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ro" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Restaurant Vânătorul{% endblock %}</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans:  ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            cream:  '#faf8f5',
+            bark:   '#9c7e5a',
+            forest: '#0d3320',
+          },
+          letterSpacing: {
+            widest2: '0.3em',
+            widest3: '0.45em',
+          },
+        },
+      },
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    :root {
+      --cream:  #faf8f5;
+      --forest: #0d3320;
+      --bark:   #9c7e5a;
+      --yellow: #facc15;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--cream); }
+    body {
+      font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      background-color: var(--cream);
+      color: var(--forest);
+    }
+    .font-serif, h1, h2, h3, h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+    ::selection { background: #facc15; color: #0d3320; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: #d6d3d1; }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #a8a29e;
+      font-size: 14px;
+      transition: color 0.2s ease, opacity 0.2s ease;
+      opacity: 0.8;
+    }
+    .social-link:hover { opacity: 1; }
+    .social-link.si-instagram:hover { color: #E1306C; }
+    .social-link.si-facebook:hover  { color: #1877F2; }
+    .social-link.si-tripadvisor:hover { color: #34E0A1; }
+  </style>
+
+  {% block extra_head %}{% endblock %}
+</head>
+
+<body class="min-h-screen antialiased overflow-x-hidden">
+
+  <!-- Top accent stripe -->
+  <div class="h-1 w-full bg-yellow-400"></div>
+
+  <!-- ── Navbar ──────────────────────────────────────────────────────────── -->
+  <header class="sticky top-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-stone-200">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 h-14 flex items-center">
+
+      <!-- Brand + Social (LEFT, flex-1) -->
+      <div class="flex flex-1 items-center gap-4">
+        <a href="/" class="flex items-center gap-2.5 group shrink-0">
+          <span class="w-7 h-7 bg-yellow-400 flex items-center justify-center shrink-0
+                       group-hover:bg-yellow-300 transition-colors">
+            <span class="font-serif text-sm font-bold text-forest leading-none">V</span>
+          </span>
+          <span class="font-serif text-[15px] text-forest tracking-wide leading-none">
+            <span class="md:hidden">Vânătorul</span>
+            <span class="hidden md:inline">Restaurant Vânătorul</span>
+          </span>
+        </a>
+
+        <!-- Social icons — desktop only (mobile set lives near hamburger) -->
+        <div class="hidden md:flex items-center gap-3 border-l border-stone-200 pl-4">
+          <a href="https://www.instagram.com/restaurant.vanatorul/" class="social-link si-instagram" aria-label="Instagram" target="_blank" rel="noopener">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.facebook.com/restaurant.vanatorul" class="social-link si-facebook" aria-label="Facebook" target="_blank" rel="noopener">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.tripadvisor.co.uk/Restaurant_Review-g616229-d1870069-Reviews-Restaurant_Vanatorul-Poiana_Brasov_Brasov_County_Central_Romania_Transylvania.html" class="social-link si-tripadvisor" aria-label="TripAdvisor" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+              <path d="M12.006 4.295c-2.67 0-5.338.784-7.645 2.353H0l1.963 2.135a5.997 5.997 0 0 0 4.04 10.43 5.976 5.976 0 0 0 4.075-1.6L12 19.705l1.922-2.09a5.972 5.972 0 0 0 4.072 1.598 6 6 0 0 0 6-5.998 5.982 5.982 0 0 0-1.957-4.432L24 6.648h-4.35a13.573 13.573 0 0 0-7.644-2.353zM12 6.255c1.531 0 3.063.303 4.504.903C13.943 8.138 12 10.43 12 13.1c0-2.671-1.942-4.962-4.504-5.942A11.72 11.72 0 0 1 12 6.256zM6.002 9.157a4.059 4.059 0 1 1 0 8.118 4.059 4.059 0 0 1 0-8.118zm11.992.002a4.057 4.057 0 1 1 .003 8.115 4.057 4.057 0 0 1-.003-8.115zm-11.992 1.93a2.128 2.128 0 0 0 0 4.256 2.128 2.128 0 0 0 0-4.256zm11.992 0a2.128 2.128 0 0 0 0 4.256 2.128 2.128 0 0 0 0-4.256z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-7">
+        <button data-show-panel="panel-meniu"
+                class="text-[11px] uppercase tracking-widest2 text-stone-500 hover:text-forest
+                       transition-colors cursor-pointer bg-transparent border-0 p-0">
+          <span data-i18n="nav.menu">Meniu</span>
+        </button>
+        <a href="#contact"
+           class="text-[11px] uppercase tracking-widest2 text-stone-500 hover:text-forest transition-colors">
+          <span data-i18n="nav.contact">Contact</span>
+        </a>
+        <!-- Lang switcher — desktop centre position -->
+        <div class="flex items-center border-l border-stone-200 pl-7 ml-0">
+          <button class="lang-btn px-1.5 py-1 text-[10px] uppercase tracking-wide font-semibold text-forest transition-colors"
+                  data-lang="ro" onclick="setLang('ro')">RO</button>
+          <span class="text-stone-300 text-[9px] select-none mx-0.5">|</span>
+          <button class="lang-btn px-1.5 py-1 text-[10px] uppercase tracking-wide text-stone-400 hover:text-forest transition-colors"
+                  data-lang="en" onclick="setLang('en')">EN</button>
+        </div>
+      </nav>
+
+      <!-- Right cluster: CTA (desktop) + mobile social + mobile lang + hamburger -->
+      <div class="flex items-center -mr-3 md:mr-0 md:ml-7">
+        <!-- Desktop CTA button — flush right edge, mirrors brand on left -->
+        <button data-show-panel="panel-rezervare"
+                class="hidden md:block px-4 py-2 border border-forest text-forest text-[11px] uppercase
+                       tracking-widest2 hover:bg-forest hover:text-cream transition-all duration-200
+                       cursor-pointer bg-transparent">
+          <span data-i18n="nav.cta">Rezervă masă</span>
+        </button>
+        <!-- Mobile social icons -->
+        <div class="md:hidden flex items-center gap-0.5">
+          <a href="https://www.instagram.com/restaurant.vanatorul/" class="social-link si-instagram min-w-[36px] min-h-[36px] justify-center" aria-label="Instagram" target="_blank" rel="noopener">
+            <i class="fab fa-instagram" style="font-size:15px"></i>
+          </a>
+          <a href="https://www.facebook.com/restaurant.vanatorul" class="social-link si-facebook min-w-[36px] min-h-[36px] justify-center" aria-label="Facebook" target="_blank" rel="noopener">
+            <i class="fab fa-facebook-f" style="font-size:15px"></i>
+          </a>
+          <a href="https://www.tripadvisor.co.uk/Restaurant_Review-g616229-d1870069-Reviews-Restaurant_Vanatorul-Poiana_Brasov_Brasov_County_Central_Romania_Transylvania.html" class="social-link si-tripadvisor min-w-[36px] min-h-[36px] justify-center" aria-label="TripAdvisor" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true">
+              <path d="M12.006 4.295c-2.67 0-5.338.784-7.645 2.353H0l1.963 2.135a5.997 5.997 0 0 0 4.04 10.43 5.976 5.976 0 0 0 4.075-1.6L12 19.705l1.922-2.09a5.972 5.972 0 0 0 4.072 1.598 6 6 0 0 0 6-5.998 5.982 5.982 0 0 0-1.957-4.432L24 6.648h-4.35a13.573 13.573 0 0 0-7.644-2.353zM12 6.255c1.531 0 3.063.303 4.504.903C13.943 8.138 12 10.43 12 13.1c0-2.671-1.942-4.962-4.504-5.942A11.72 11.72 0 0 1 12 6.256zM6.002 9.157a4.059 4.059 0 1 1 0 8.118 4.059 4.059 0 0 1 0-8.118zm11.992.002a4.057 4.057 0 1 1 .003 8.115 4.057 4.057 0 0 1-.003-8.115zm-11.992 1.93a2.128 2.128 0 0 0 0 4.256 2.128 2.128 0 0 0 0-4.256zm11.992 0a2.128 2.128 0 0 0 0 4.256 2.128 2.128 0 0 0 0-4.256z"/>
+            </svg>
+          </a>
+        </div>
+        <!-- Language switcher — mobile only (desktop copy lives in the nav) -->
+        <div class="md:hidden flex items-center border-l border-stone-200 pl-2 ml-1">
+          <button class="lang-btn px-1.5 py-1 text-[10px] uppercase tracking-wide font-semibold text-forest transition-colors"
+                  data-lang="ro" onclick="setLang('ro')">RO</button>
+          <span class="text-stone-300 text-[9px] select-none mx-0.5">|</span>
+          <button class="lang-btn px-1.5 py-1 text-[10px] uppercase tracking-wide text-stone-400 hover:text-forest transition-colors"
+                  data-lang="en" onclick="setLang('en')">EN</button>
+        </div>
+        <!-- Mobile hamburger — min 44 × 44 px touch target -->
+        <button id="menu-btn"
+                class="md:hidden p-3 text-stone-500 hover:text-forest transition-colors"
+                aria-label="Meniu mobil">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path id="icon-open"  stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M4 6h16M4 12h16M4 18h16"/>
+            <path id="icon-close" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M6 18L18 6M6 6l12 12" class="hidden"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-stone-200 bg-cream">
+      <div class="px-6 py-4 flex flex-col gap-1">
+        <!-- Contact — only item in mobile drawer -->
+        <a href="#contact"
+           class="px-4 py-4 border border-stone-300 text-stone-600 text-[11px] uppercase
+                  tracking-widest2 text-center hover:border-forest hover:text-forest transition-all
+                  flex items-center justify-center min-h-[44px] w-full">
+          <span data-i18n="nav.contact">Contact</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Page content ────────────────────────────────────────────────────── -->
+  <main>{% block content %}{% endblock %}</main>
+
+  <!-- ── Footer ─────────────────────────────────────────────────────────── -->
+  <footer class="border-t border-stone-200 bg-white" id="contact">
+
+    <!-- Folk art footer divider -->
+    <div class="overflow-hidden">
+      <svg width="100%" height="20" viewBox="0 0 1200 20"
+           preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="footer-folk" x="0" y="0" width="60" height="20"
+                   patternUnits="userSpaceOnUse">
+            <polygon points="30,2 58,10 30,18 2,10"
+                     fill="none" stroke="#e7e5e3" stroke-width="0.75"/>
+            <polygon points="30,7 43,10 30,13 17,10" fill="#facc1530"/>
+            <line x1="0" y1="10" x2="2"  y2="10" stroke="#e7e5e3" stroke-width="0.75"/>
+            <line x1="58" y1="10" x2="60" y2="10" stroke="#e7e5e3" stroke-width="0.75"/>
+            <circle cx="0"  cy="10" r="1.2" fill="#d6d3d1"/>
+            <circle cx="60" cy="10" r="1.2" fill="#d6d3d1"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="20" fill="url(#footer-folk)"/>
+      </svg>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+
+      <!-- Brand -->
+      <div class="sm:col-span-2 lg:col-span-1">
+        <div class="flex items-center gap-2.5 mb-4">
+          <span class="w-7 h-7 bg-yellow-400 flex items-center justify-center shrink-0">
+            <span class="font-serif text-sm font-bold text-forest">V</span>
+          </span>
+          <span class="font-serif text-base text-forest">Vânătorul</span>
+        </div>
+        <p class="text-stone-500 text-sm leading-relaxed max-w-[220px]" data-i18n="footer.desc">
+          O experiență culinară autentică în inima munților Brașovului, cu preparate
+          tradiționale de vânat.
+        </p>
+      </div>
+
+      <!-- Contact -->
+      <div id="contact-info">
+        <p class="text-[10px] uppercase tracking-widest3 text-bark mb-4">Contact</p>
+        <ul class="space-y-2 text-stone-500 text-sm">
+          <li>Poiana Brașov, Brașov</li>
+          <li>+40 268 262 354</li>
+          <li>
+            <a href="mailto:Office@restaurant-vanatorul.ro"
+               class="hover:text-forest transition-colors">Office@restaurant-vanatorul.ro</a>
+          </li>
+          <li>
+            <a href="mailto:Office@casa-emil.ro"
+               class="hover:text-forest transition-colors">Office@casa-emil.ro</a>
+          </li>
+          <li>
+            <a href="mailto:Office@roua.coffee"
+               class="hover:text-forest transition-colors">Office@roua.coffee</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Hours -->
+      <div id="rezervare">
+        <p class="text-[10px] uppercase tracking-widest3 text-bark mb-4" data-i18n="footer.hours">Program</p>
+        <ul class="space-y-1.5 text-stone-500 text-sm">
+          <li data-i18n="footer.mon-thu">Luni – Joi · închis</li>
+          <li data-i18n="footer.fri-sun">Vineri – Duminică · 12:30 – 22:30</li>
+          <li class="pt-1.5 border-t border-stone-100">
+            <span class="text-[10px] uppercase tracking-widest2 text-bark" data-i18n="footer.from-june">Din 13 iunie</span>
+          </li>
+          <li data-i18n="footer.all-week">Luni – Duminică · 12:30 – 22:30</li>
+        </ul>
+      </div>
+
+      <!-- Nav links -->
+      <div>
+        <p class="text-[10px] uppercase tracking-widest3 text-bark mb-4" data-i18n="footer.nav">Navigare</p>
+        <ul class="space-y-2">
+          <li>
+            <a href="#meniu"
+               class="text-sm text-stone-500 hover:text-forest transition-colors"
+               data-i18n="footer.nav.menu">
+              Meniu
+            </a>
+          </li>
+          <li>
+            <a href="#rezervare"
+               class="text-sm text-stone-500 hover:text-forest transition-colors"
+               data-i18n="footer.nav.reservation">
+              Rezervare
+            </a>
+          </li>
+          <li>
+            <a href="#contact-info"
+               class="text-sm text-stone-500 hover:text-forest transition-colors"
+               data-i18n="footer.nav.contact">
+              Contact
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-stone-100 py-5 text-center text-stone-400 text-[11px] tracking-widest2">
+      © {% now "Y" %} Restaurant Vânătorul · <span data-i18n="footer.rights">Toate drepturile rezervate</span>
+    </div>
+  </footer>
+
+  <script>
+    const btn      = document.getElementById('menu-btn');
+    const drawer   = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('icon-open');
+    const iconClose= document.getElementById('icon-close');
+
+    btn.addEventListener('click', () => {
+      const willShow = drawer.classList.toggle('hidden') === false;
+      iconOpen.classList.toggle('hidden',  willShow);
+      iconClose.classList.toggle('hidden', !willShow);
+    });
+    drawer.querySelectorAll('a, button[data-show-panel]').forEach(el => el.addEventListener('click', () => {
+      drawer.classList.add('hidden');
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+    }));
+  </script>
+
+  <script>
+    const i18n = {
+      ro: {
+        'nav.menu': 'Meniu', 'nav.reservation': 'Rezervare',
+        'nav.contact': 'Contact', 'nav.cta': 'Rezervă masă',
+        'footer.desc': 'O experiență culinară autentică în inima munților Brașovului, cu preparate tradiționale de vânat.',
+        'footer.hours': 'Program',
+        'footer.mon-thu': 'Luni – Joi · închîs',
+        'footer.fri-sun': 'Vineri – Duminică · 12:30 – 22:30',
+        'footer.from-june': 'Din 13 iunie',
+        'footer.all-week': 'Luni – Duminică · 12:30 – 22:30',
+        'footer.nav': 'Navigare', 'footer.nav.menu': 'Meniu',
+        'footer.nav.reservation': 'Rezervare', 'footer.nav.contact': 'Contact',
+        'footer.rights': 'Toate drepturile rezervate',
+        'vert.menu.mobile': 'Meniu', 'vert.menu.desktop': 'Explorează Meniu',
+        'vert.book': 'Rezervă Masă', 'vert.events': 'Evenimente',
+        'vert.casa-emil.mobile': 'Casa Emil', 'vert.casa-emil.desktop': 'Cazare Casa Emil',
+        'hero.tagline': 'Bucătărie tradițională cu un gram de modernism',
+        'hero.desc': 'Savurați preparate autentice și din vânat în spiritul ospitalității montane românești.',
+        'hero.heritage': 'Povestea Continuă din 1975',
+        'hero.tag1': 'Est. Poiana Brașov',
+        'hero.tag2': 'Bucătărie Modernă Autentică',
+        'hero.tag3': 'Vânat Proaspăt',
+        'meniu.subtitle': 'Bucătăria noastră',
+        'meniu.empty': 'Meniul nu este disponibil momentan.',
+        'rezervare.location': 'Poiana Brașov · Restaurant Vânătorul',
+        'rezervare.title': 'Rezervă masă', 'rezervare.name': 'Nume complet',
+        'rezervare.phone': 'Telefon', 'rezervare.date': 'Data',
+        'rezervare.time': 'Ora', 'rezervare.guests': 'Persoane',
+        'rezervare.submit': 'Confirmă rezervarea',
+        'rezervare.notice': 'Vă vom contacta pentru confirmare în cel mai scurt timp.',
+        'events.subtitle': 'Spațiu disponibil',
+        'events.location': 'Poiana Brașov, Brașov, România',
+        'events.sala-mare.desc': 'Spațiu generos pentru banchete și ceremonii, cu luminatoare naturale și decor montan autentic.',
+        'events.sala-mica.desc': 'Elegantă și intimă, ideală pentru conferințe, cine de afaceri sau reuniuni private.',
+        'events.salon-cap.desc': 'Salon intim cu specific montan, ideal pentru celebrări speciale și mese de protocol.',
+        'events.gradina.title': 'Grădina de Vară',
+        'events.gradina.desc': 'Terasă în aer liber cu priveliste montană, pergolă acoperită și ambient natural pitoresc.',
+        'events.interior': 'Număr Locuri Interior',
+        'events.exterior': 'Număr Locuri Exterior',
+        'events.offer': 'Solicită ofertă',
+      },
+      en: {
+        'nav.menu': 'Menu', 'nav.reservation': 'Reservation',
+        'nav.contact': 'Contact', 'nav.cta': 'Reservation',
+        'footer.desc': 'An authentic culinary experience in the heart of the Brașov mountains, with traditional game dishes.',
+        'footer.hours': 'Hours',
+        'footer.mon-thu': 'Mon – Thu · closed',
+        'footer.fri-sun': 'Fri – Sun · 12:30 – 22:30',
+        'footer.from-june': 'From June 13',
+        'footer.all-week': 'Mon – Sun · 12:30 – 22:30',
+        'footer.nav': 'Navigation', 'footer.nav.menu': 'Menu',
+        'footer.nav.reservation': 'Reservation', 'footer.nav.contact': 'Contact',
+        'footer.rights': 'All rights reserved',
+        'vert.menu.mobile': 'Menu', 'vert.menu.desktop': 'Explore Menu',
+        'vert.book': 'Reservation', 'vert.events': 'Events',
+        'vert.casa-emil.mobile': 'Casa Emil', 'vert.casa-emil.desktop': 'Stay at Casa Emil',
+        'hero.tagline': 'Traditional cuisine with a touch of modernism',
+        'hero.desc': 'Savor authentic game dishes in the spirit of Romanian mountain hospitality.',
+        'hero.heritage': 'The Story Continues Since 1975',
+        'hero.tag1': 'Est. Poiana Brașov',
+        'hero.tag2': 'Authentic Modern Cuisine',
+        'hero.tag3': 'Fresh Game',
+        'meniu.subtitle': 'Our Kitchen',
+        'meniu.empty': 'The menu is not available at the moment.',
+        'rezervare.location': 'Poiana Brașov · Restaurant Vânătorul',
+        'rezervare.title': 'Reserve a table', 'rezervare.name': 'Full name',
+        'rezervare.phone': 'Phone', 'rezervare.date': 'Date',
+        'rezervare.time': 'Time', 'rezervare.guests': 'Guests',
+        'rezervare.submit': 'Confirm reservation',
+        'rezervare.notice': 'We will contact you for confirmation as soon as possible.',
+        'events.subtitle': 'Available space',
+        'events.location': 'Poiana Brașov, Brașov, Romania',
+        'events.sala-mare.desc': 'Generous space for banquets and ceremonies, with natural skylights and authentic mountain decor.',
+        'events.sala-mica.desc': 'Elegant and intimate, ideal for conferences, business dinners or private gatherings.',
+        'events.salon-cap.desc': 'Intimate salon with mountain character, ideal for special celebrations and protocol dinners.',
+        'events.gradina.title': 'Summer Garden',
+        'events.gradina.desc': 'Open-air terrace with mountain views, covered pergola and picturesque natural ambiance.',
+        'events.interior': 'Indoor Seats',
+        'events.exterior': 'Outdoor Seats',
+        'events.offer': 'Request a quote',
+      }
+    };
+
+    function setLang(lang) {
+      const dict = i18n[lang];
+      if (!dict) return;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (key in dict) el.textContent = dict[key];
+      });
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        const active = btn.dataset.lang === lang;
+        btn.classList.toggle('font-semibold', active);
+        btn.classList.toggle('text-forest', active);
+        btn.classList.toggle('text-stone-400', !active);
+      });
+      localStorage.setItem('lang', lang);
+      document.documentElement.lang = lang;
+    }
+
+    setLang(localStorage.getItem('lang') || 'ro');
+  </script>
+
+  {% block extra_js %}{% endblock %}
+</body>
+</html>
