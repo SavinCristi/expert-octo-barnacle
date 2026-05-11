@@ -60,7 +60,7 @@ EVENT_TYPE_LABELS = {
 
 def home(request):
     grouped = defaultdict(list)
-    for item in MenuItem.objects.all().order_by("category", "name"):
+    for item in MenuItem.objects.all().order_by("sort_order"):
         grouped[item.category].append(item)
 
     menu_sections = []
