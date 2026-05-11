@@ -36,13 +36,13 @@ CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'adminsortable2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'adminsortable2',
     'restaurant',
 ]
 
