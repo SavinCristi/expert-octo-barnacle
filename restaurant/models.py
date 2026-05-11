@@ -2,6 +2,7 @@ from django.db import models
 
 
 class MenuItem(models.Model):
+    sort_order = models.PositiveIntegerField(default=0, blank=False, null=False)
     name = models.CharField(max_length=200)
     name_en = models.CharField(max_length=200, blank=True, default='')
     description = models.TextField(blank=True)
@@ -10,6 +11,9 @@ class MenuItem(models.Model):
     weight = models.CharField(max_length=50)
     category = models.CharField(max_length=100)
     image = models.ImageField(upload_to='menu/', blank=True, null=True)
+
+    class Meta:
+        ordering = ['sort_order']
 
     def __str__(self):
         return self.name

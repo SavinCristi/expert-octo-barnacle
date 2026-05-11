@@ -1,10 +1,11 @@
 from django.contrib import admin
+from adminsortable2.admin import SortableAdminMixin
 
 from .models import EventInquiry, MenuItem, Reservation
 
 
 @admin.register(MenuItem)
-class MenuItemAdmin(admin.ModelAdmin):
+class MenuItemAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display  = ('name', 'name_en', 'category', 'price', 'weight')
     list_filter   = ('category',)
     search_fields = ('name', 'name_en')
