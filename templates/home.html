@@ -544,8 +544,19 @@
           </div>
         </div>
 
+        <!-- GDPR consent checkbox -->
+        <div class="flex items-start gap-3">
+          <input type="checkbox" id="r-gdpr"
+                 class="mt-0.5 w-4 h-4 shrink-0 accent-forest cursor-pointer" />
+          <label for="r-gdpr" class="text-xs text-stone-500 font-light leading-relaxed cursor-pointer select-none">
+            Acceptă
+            <a href="{% url 'privacy_policy' %}" target="_blank" rel="noopener"
+               class="underline hover:text-forest transition-colors">Politica de Confidențialitate</a>
+          </label>
+        </div>
+
         <!-- Submit row -->
-        <div class="pt-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div class="pt-2 flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <button id="r-submit" type="submit"
                   class="px-8 py-3 bg-forest text-cream text-[11px] uppercase tracking-widest2
                          hover:bg-emerald-900 disabled:opacity-50 disabled:cursor-not-allowed
@@ -871,8 +882,19 @@
                            transition-colors resize-none"></textarea>
         </div>
 
+        <!-- GDPR consent checkbox -->
+        <div class="flex items-start gap-3">
+          <input type="checkbox" id="ev-gdpr"
+                 class="mt-0.5 w-4 h-4 shrink-0 accent-forest cursor-pointer" />
+          <label for="ev-gdpr" class="text-xs text-stone-500 font-light leading-relaxed cursor-pointer select-none">
+            Acceptă
+            <a href="{% url 'privacy_policy' %}" target="_blank" rel="noopener"
+               class="underline hover:text-forest transition-colors">Politica de Confidențialitate</a>
+          </label>
+        </div>
+
         <!-- Submit row -->
-        <div class="pt-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div class="pt-2 flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <button id="ev-submit" type="submit"
                   class="px-8 py-3 bg-forest text-cream text-[11px] uppercase tracking-widest2
                          hover:bg-emerald-900 disabled:opacity-50 disabled:cursor-not-allowed
@@ -1088,6 +1110,12 @@
     errorEl.classList.add('hidden');
     errorEl.textContent = '';
 
+    if (!document.getElementById('r-gdpr').checked) {
+      errorEl.textContent = 'Vă rugăm să acceptați Politica de Confidențialitate pentru a continua.';
+      errorEl.classList.remove('hidden');
+      return;
+    }
+
     const origLabel   = btn.textContent.trim();
     btn.disabled      = true;
     btn.textContent   = '…';
@@ -1140,6 +1168,12 @@
     e.preventDefault();
     errorEl.classList.add('hidden');
     errorEl.textContent = '';
+
+    if (!document.getElementById('ev-gdpr').checked) {
+      errorEl.textContent = 'Vă rugăm să acceptați Politica de Confidențialitate pentru a continua.';
+      errorEl.classList.remove('hidden');
+      return;
+    }
 
     const origLabel = btn.textContent.trim();
     btn.disabled    = true;

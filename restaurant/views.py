@@ -58,6 +58,10 @@ EVENT_TYPE_LABELS = {
 }
 
 
+def privacy_policy(request):
+    return render(request, "privacy_policy.html")
+
+
 def home(request):
     grouped = defaultdict(list)
     for item in MenuItem.objects.all().order_by("sort_order"):
