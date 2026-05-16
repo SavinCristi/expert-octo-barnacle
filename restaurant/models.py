@@ -9,6 +9,8 @@ class MenuItem(models.Model):
     description_en = models.TextField(blank=True, default='')
     price = models.DecimalField(max_digits=8, decimal_places=2)
     weight = models.CharField(max_length=50)
+    calories = models.CharField(max_length=50, blank=True, null=True)
+    allergens = models.CharField(max_length=200, blank=True, null=True)
     category = models.CharField(max_length=100)
     image = models.ImageField(upload_to='menu/', blank=True, null=True)
 

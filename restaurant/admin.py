@@ -6,13 +6,13 @@ from .models import EventInquiry, MenuItem, Reservation
 
 @admin.register(MenuItem)
 class MenuItemAdmin(SortableAdminMixin, admin.ModelAdmin):
-    list_display       = ('sort_order', 'name', 'name_en', 'category', 'price', 'weight')
+    list_display       = ('sort_order', 'name', 'name_en', 'category', 'price', 'weight', 'allergens')
     list_display_links = ('name',)
     list_filter        = ('category',)
     search_fields      = ('name', 'name_en')
     ordering           = ('sort_order',)
     fieldsets = (
-        (None, {'fields': ('category', 'price', 'weight', 'image')}),
+        (None, {'fields': ('category', 'price', 'weight', 'calories', 'allergens', 'image')}),
         ('Romanian', {'fields': ('name', 'description')}),
         ('English', {'fields': ('name_en', 'description_en')}),
     )
