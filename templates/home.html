@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Restaurant Vânătorul · Poiana Brașov{% endblock %}
 
@@ -10,208 +11,262 @@
     scrollbar-width: none;
   }
   .menu-sub-scroll::-webkit-scrollbar { display: none; }
+
+  /* ── Hero title sizing: mobile 35% bigger, desktop 20% bigger ── */
+  .hero-title-block {
+    padding-top: 2.5rem;
+  }
+  .hero-h1 {
+    font-size: 3.24rem;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.88), 0 3px 24px rgba(0,0,0,0.72), 0 6px 48px rgba(0,0,0,0.55);
+  }
+  .hero-ftf {
+    font-size: 1.15rem;
+    color: rgba(255,255,255,1.0);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.85), 0 3px 20px rgba(0,0,0,0.65);
+  }
+  @media (min-width: 640px) {
+    .hero-title-block { padding-top: 3.5rem; }
+  }
+  @media (min-width: 768px) {
+    .hero-title-block { padding-top: calc(4rem + 7vh); }
+    .hero-h1 {
+      font-size: clamp(2.88rem, 9.36vw, 7.92rem);
+      text-shadow: 0 2px 24px rgba(0,0,0,0.55), 0 4px 60px rgba(13,51,32,0.55);
+    }
+    .hero-ftf {
+      font-size: clamp(1.02rem, 2.64vw, 2.4rem);
+      color: rgba(255,255,255,0.82);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.45);
+    }
+  }
+  @media (min-width: 1024px) {
+    .hero-title-block { padding-top: calc(5rem + 7vh); }
+  }
 </style>
 {% endblock %}
 
 {% block content %}
 
 <!-- ═══════════════════════════════════════════════════════════════════════
-     MOUNTAIN BANNER  —  full-width panoramic SVG at the very top
+     PHOTO HERO  —  text on picture; buttons as separate white component
 ═══════════════════════════════════════════════════════════════════════ -->
-<div class="w-full overflow-hidden border-b border-stone-300/60">
-  <svg xmlns="http://www.w3.org/2000/svg"
-       viewBox="0 0 1200 200"
-       preserveAspectRatio="xMidYMid slice"
-       style="display:block; width:100%; height:clamp(130px,18vw,200px)"
-       aria-hidden="true">
-    <defs>
-      <clipPath id="cp-banner">
-        <rect width="1200" height="200"/>
-      </clipPath>
-    </defs>
+<section class="relative w-full">
 
-    <!-- Sky -->
-    <rect width="1200" height="200" fill="#faf8f5"/>
+  <!-- ── Image area with text overlay ── -->
+  <div class="relative w-full overflow-hidden" style="height: clamp(420px, 70vh, 680px)">
 
-    <!-- Yellow sun arc rising at the horizon -->
-    <circle cx="600" cy="200" r="95"
-            fill="#facc15" opacity="0.72" clip-path="url(#cp-banner)"/>
+    <img src="{% static 'main.jpeg' %}"
+         alt="Restaurant Vânătorul, Poiana Brașov"
+         class="absolute inset-0 w-full h-full object-cover object-center" />
 
-    <!-- Layer 1 — farthest range, ghost (9 % opacity) -->
-    <polygon
-      points="0,200 0,118 90,52 200,98 320,38 445,84 560,44 670,76 790,30 910,74 1020,40 1130,80 1200,62 1200,200"
-      fill="#0d3320" opacity="0.09"/>
+    <svg xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 1200 500"
+         preserveAspectRatio="xMidYMax slice"
+         class="absolute inset-0 w-full h-full pointer-events-none"
+         style="mix-blend-mode: multiply; opacity: 0.50;">
+      <polygon
+        points="0,500 0,290 130,185 290,245 460,130 630,210 800,95 970,185 1130,110 1200,155 1200,500"
+        fill="#0d3320" opacity="0.30" />
+      <polygon
+        points="0,500 0,370 85,325 195,355 310,300 435,338 555,288 680,322 800,276 920,312 1040,278 1145,306 1200,290 1200,500"
+        fill="#0d3320" opacity="0.55" />
+      <polygon
+        points="0,500 0,438 55,415 110,432 165,408 220,428 278,404 334,424 390,408 448,428 505,412 562,430 618,415 675,433 732,418 790,435 848,420 905,437 962,423 1020,438 1078,424 1136,440 1200,428 1200,500"
+        fill="#0d3320" opacity="0.80" />
+    </svg>
 
-    <!-- Layer 2 — mid-distance ridge (22 % opacity) -->
-    <polygon
-      points="0,200 0,148 75,118 165,140 260,102 360,128 460,94 560,118 660,98 760,124 860,90 960,118 1055,100 1150,130 1200,114 1200,200"
-      fill="#0d3320" opacity="0.22"/>
+    <div class="absolute inset-0"
+         style="background: linear-gradient(
+           to bottom,
+           rgba(13,51,32,0.60) 0%,
+           rgba(0,0,0,0.10) 28%,
+           rgba(0,0,0,0.0)  46%,
+           rgba(0,0,0,0.18) 68%,
+           rgba(13,51,32,0.65) 100%
+         );"></div>
 
-    <!-- Layer 3 — nearest ridge, full opacity, defines the skyline -->
-    <polygon
-      points="0,200 0,164 55,150 105,168 150,136 195,162 240,128 282,158 322,130 368,162 408,136 452,166 494,140 538,168 578,142 618,166 660,140 705,166 748,144 793,168 836,142 882,168 924,146 970,168 1012,146 1056,168 1098,148 1144,168 1200,150 1200,200"
-      fill="#0d3320"/>
-
-    <!-- Yellow snow caps on five prominent peaks -->
-    <polygon points="150,136 160,152 140,152" fill="#facc15" opacity="0.90"/>
-    <polygon points="322,130 333,147 311,147" fill="#facc15" opacity="0.82"/>
-    <polygon points="578,142 590,159 566,159" fill="#facc15" opacity="0.90"/>
-    <polygon points="836,142 848,159 824,159" fill="#facc15" opacity="0.82"/>
-    <polygon points="1098,148 1109,164 1087,164" fill="#facc15" opacity="0.70"/>
-
-    <!-- Horizon rule -->
-    <line x1="0" y1="200" x2="1200" y2="200" stroke="#0d3320" stroke-width="1"/>
-  </svg>
-</div>
-
-
-<!-- ═══════════════════════════════════════════════════════════════════════
-     GROUP VERTICALS BAR  —  5 buttons, icon-left, mobile-first
-═══════════════════════════════════════════════════════════════════════ -->
-<div class="w-full bg-cream border-b border-stone-200">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-4 sm:py-5">
-
-    <!-- Mobile: 2-col grid (Roua full-width on row 3)  |  md+: single flex row centered -->
-    <div class="grid grid-cols-2 md:flex md:flex-wrap md:justify-center gap-2">
-
-      <!-- ── 1. Meniu (mobile label) / Explorează Meniu (desktop) ── -->
-      <button data-show-panel="panel-meniu"
-              class="group flex items-center px-5 py-3 sm:px-7
-                     border border-stone-200 bg-cream
-                     hover:border-forest/40 hover:bg-yellow-50/50
-                     transition-all duration-200 cursor-pointer justify-center
-                     min-h-[48px] w-full md:w-auto">
-        <span class="md:hidden text-[10px] font-medium uppercase tracking-widest2 text-forest
-                     group-hover:text-bark transition-colors leading-tight" data-i18n="vert.menu.mobile">Meniu</span>
-        <span class="hidden md:inline text-[10px] font-medium uppercase tracking-widest2 text-forest
-                     group-hover:text-bark transition-colors leading-tight" data-i18n="vert.menu.desktop">Explorează Meniu</span>
-      </button>
-
-      <!-- ── 2. Rezervă Masă ── -->
-      <button data-show-panel="panel-rezervare"
-              class="group flex items-center px-5 py-3 sm:px-7
-                     border border-forest bg-forest
-                     hover:bg-emerald-900 hover:border-emerald-900
-                     transition-all duration-200 cursor-pointer justify-center
-                     min-h-[48px] w-full md:w-auto">
-        <span class="text-[10px] font-semibold uppercase tracking-widest2 text-cream
-                     transition-colors leading-tight" data-i18n="vert.book">
-          Rezervă Masă
-        </span>
-      </button>
-
-      <!-- ── 3. Evenimente ── -->
-      <button data-show-panel="panel-evenimente"
-              class="group flex items-center px-5 py-3 sm:px-7
-                     border border-stone-200 bg-cream
-                     hover:border-forest/40 hover:bg-yellow-50/50
-                     transition-all duration-200 cursor-pointer justify-center
-                     min-h-[48px] w-full md:w-auto">
-        <span class="text-[10px] font-medium uppercase tracking-widest2 text-forest
-                     group-hover:text-bark transition-colors leading-tight" data-i18n="vert.events">
-          Evenimente
-        </span>
-      </button>
-
-      <!-- ── 4. Casa Emil (mobile label) / Cazare Casa Emil (desktop) ── -->
-      <div class="group relative w-full md:w-auto">
-        <a href="#" data-tooltip="tooltip-casaemil"
-           class="flex items-center px-5 py-3 sm:px-7
-                  border border-stone-200 bg-cream
-                  hover:border-forest/40 hover:bg-yellow-50/50
-                  transition-all duration-200 justify-center
-                  min-h-[48px] w-full h-full">
-          <span class="md:hidden text-[10px] font-medium uppercase tracking-widest2 text-forest
-                       group-hover:text-bark transition-colors leading-tight" data-i18n="vert.casa-emil.mobile">Casa Emil</span>
-          <span class="hidden md:inline text-[10px] font-medium uppercase tracking-widest2 text-forest
-                       group-hover:text-bark transition-colors leading-tight" data-i18n="vert.casa-emil.desktop">Cazare Casa Emil</span>
-        </a>
-        <span id="tooltip-casaemil"
-              class="absolute top-full mt-1 left-1/2 -translate-x-1/2 z-10
-                     text-[9px] tracking-wide italic text-bark whitespace-nowrap
-                     bg-cream px-2 py-0.5 border border-stone-100
-                     opacity-0 group-hover:opacity-100 transition-opacity duration-300
-                     pointer-events-none">
-          Se redeschide · Decembrie 2026
-        </span>
-      </div>
-
-      <!-- ── 5. Roua Speciality Coffee — full width on mobile (row 3), last ── -->
-      <div class="group relative w-full md:w-auto col-span-2 md:col-span-1">
-        <a href="#" data-tooltip="tooltip-roua"
-           class="flex items-center px-5 py-3 sm:px-7
-                  border border-stone-200 bg-cream
-                  hover:border-forest/40 hover:bg-yellow-50/50
-                  transition-all duration-200 justify-center
-                  min-h-[48px] w-full h-full">
-          <span class="text-[10px] font-medium uppercase tracking-widest2 text-forest
-                       group-hover:text-bark transition-colors leading-tight">
-            Roua Origins Coffee
-          </span>
-        </a>
-        <span id="tooltip-roua"
-              class="absolute top-full mt-1 left-1/2 -translate-x-1/2 z-10
-                     text-[9px] tracking-wide italic text-bark whitespace-nowrap
-                     bg-cream px-2 py-0.5 border border-stone-100
-                     opacity-0 group-hover:opacity-100 transition-opacity duration-300
-                     pointer-events-none">
-          Din 13 Iunie 2026
-        </span>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-
-<!-- ═══════════════════════════════════════════════════════════════════════
-     HERO  —  text-driven, single column
-═══════════════════════════════════════════════════════════════════════ -->
-<section class="border-b border-stone-200 flex flex-col">
-
-  <!-- Hero text block -->
-  <div class="max-w-4xl mx-auto w-full flex flex-col items-center justify-center text-center
-              px-8 sm:px-12 lg:px-16 xl:px-24 pt-12 pb-20 lg:pt-16 lg:pb-28">
-
-    <!-- Display heading -->
-    <h1 class="font-serif font-bold leading-[0.88] text-forest mb-3
-               text-[clamp(2.975rem,9.35vw,7.65rem)]">
-      Vânătorul
-    </h1>
-
-    <!-- Subtitle: "Forest to Fork" at ~50% the H1 size -->
-    <p class="font-serif font-normal italic text-stone-400 mb-8 leading-tight
-              text-[clamp(1.4rem,4.5vw,3.8rem)]">
-      "Forest to Fork"
-    </p>
-
-    <!-- Yellow rule + tagline -->
-    <div class="flex items-center gap-4 mb-6">
-      <span class="block w-10 h-0.5 bg-yellow-400 shrink-0"></span>
-      <p class="text-stone-500 text-sm font-light italic" data-i18n="hero.tagline">
-        Bucătărie tradițională cu un gram de modernism
+    <!-- Title: Vânătorul + "Forest to Fork" — top-center on the image -->
+    <div class="hero-title-block absolute top-0 left-0 right-0 flex flex-col items-center text-center px-6">
+      <h1 class="hero-h1 font-serif font-bold text-white leading-none mb-2 sm:mb-3">
+        Vânătorul
+      </h1>
+      <p class="hero-ftf font-serif italic leading-tight">
+        "Forest to Fork"
       </p>
-      <span class="block w-10 h-0.5 bg-yellow-400 shrink-0"></span>
     </div>
 
-    <p class="text-stone-500 text-base leading-relaxed max-w-sm mb-10 font-light" data-i18n="hero.desc">
-      Savurați preparate autentice și din vânat în spiritul ospitalității montane românești.
-    </p>
+    <!-- Tagline block — white text, bottom of image, near the buttons -->
+    <div class="absolute bottom-[calc(95px+14vh)] sm:bottom-0 left-0 right-0 flex flex-col items-center
+                text-center px-6 pb-16 sm:pb-12 md:pb-12">
+      <div class="w-full max-w-lg">
 
-    <!-- Heritage tagline -->
-    <p class="font-serif italic text-stone-400 text-lg tracking-wide" data-i18n="hero.heritage">
-      Povestea Continuă din 1975
-    </p>
+        <div class="hidden md:flex items-center gap-5 mb-7">
+          <span class="h-px flex-1 bg-white/25"></span>
+          <i class="fas fa-utensils text-white/35 text-xs" aria-hidden="true"></i>
+          <span class="h-px flex-1 bg-white/25"></span>
+        </div>
 
-    <!-- Bottom meta strip -->
-    <div class="mt-auto pt-10 md:pt-16 flex flex-wrap justify-center gap-x-4 gap-y-1 text-[10px] uppercase tracking-widest2 text-stone-400">
-      <span data-i18n="hero.tag1">Est. Poiana Brașov</span>
-      <span class="text-yellow-400">◆</span>
-      <span data-i18n="hero.tag2">Bucătărie Modernă Autentică</span>
-      <span class="text-yellow-400">◆</span>
-      <span data-i18n="hero.tag3">Vânat Proaspăt</span>
+        <p class="hidden md:block font-serif md:text-base lg:text-lg text-white md:mb-2 leading-snug"
+           data-i18n="hero.tagline">
+          Bucătărie tradițională cu un gram de modernism
+        </p>
+
+        <p class="hidden md:block text-white/70 md:text-sm leading-relaxed font-light md:mb-2"
+           data-i18n="hero.desc">
+          Savurați preparate autentice și din vânat în spiritul ospitalității montane românești.
+        </p>
+        <div class="hidden md:flex items-center gap-5 mt-7">
+          <span class="h-px flex-1 bg-white/25"></span>
+          <i class="fas fa-utensils text-white/35 text-xs"
+             style="transform: rotate(180deg);" aria-hidden="true"></i>
+          <span class="h-px flex-1 bg-white/25"></span>
+        </div>
+
+      </div>
     </div>
-  </div>
+
+  </div><!-- /image area -->
+
+
+  <!-- ── WHITE BUTTONS COMPONENT: sits below image; pulled up on mobile ── -->
+  <div class="-mt-[calc(10%+6rem+16.1vh)] md:mt-0 relative z-10
+              mx-3 sm:mx-8 md:mx-auto md:max-w-5xl
+              bg-white border border-stone-200
+              shadow-[0_8px_48px_rgba(0,0,0,0.14)]
+              mb-12 md:mb-16">
+
+    <!-- Buttons: 2-col on mobile, 5-col on desktop -->
+    <div class="grid grid-cols-2 md:grid-cols-5 border-t border-stone-200">
+
+    <!-- ── 1. Meniu ── -->
+    <button data-show-panel="panel-meniu"
+            class="group border-r border-b border-stone-200 bg-white
+                   hover:bg-yellow-50/40 transition-colors duration-200
+                   cursor-pointer flex flex-col items-center text-center
+                   px-4 py-5 md:px-4 md:py-7
+                   min-h-[136px] md:min-h-[150px]">
+      <div class="w-11 h-11 rounded-full border border-stone-200
+                  flex items-center justify-center mb-3 md:mb-3
+                  group-hover:border-forest/35 transition-colors shrink-0">
+        <i class="fas fa-utensils text-stone-400 group-hover:text-forest transition-colors"
+           style="font-size:15px"></i>
+      </div>
+      <p class="text-[10px] font-semibold uppercase tracking-widest2 text-forest mb-1 md:mb-2"
+         data-i18n="vert.menu.mobile">Meniu</p>
+      <p class="text-[11px] text-stone-400 font-light leading-snug max-w-[140px] md:max-w-[120px]">
+        Preparate tradiționale de vânat și bucătărie montană autentică
+      </p>
+    </button>
+
+    <!-- ── 2. Rezerva Masa — dark forest-green feature card ── -->
+    <button data-show-panel="panel-rezervare"
+            class="group border-r border-b border-stone-200
+                   bg-[#0d3320] hover:bg-[#0a2b1c] transition-colors duration-200
+                   cursor-pointer flex flex-col items-center text-center
+                   px-4 py-5 md:px-4 md:py-7
+                   min-h-[136px] md:min-h-[150px]">
+      <div class="w-11 h-11 rounded-full border border-white/20
+                  flex items-center justify-center mb-3 md:mb-3 shrink-0">
+        <i class="fas fa-calendar-check text-white/65 group-hover:text-white/90 transition-colors"
+           style="font-size:15px"></i>
+      </div>
+      <p class="text-[10px] font-semibold uppercase tracking-widest2 text-white mb-1 md:mb-2"
+         data-i18n="vert.book">Rezervă Masă</p>
+      <p class="hidden md:block text-[11px] text-white/55 font-light leading-snug max-w-[120px] mb-5">
+        Rezervă-ți locul pentru o seară de neuitat în inima munților
+      </p>
+      <span class="mt-auto inline-block px-4 py-1.5 rounded-full border border-white/40
+                   text-white text-[9px] uppercase tracking-widest2
+                   group-hover:bg-white group-hover:text-[#0d3320] transition-colors duration-200"
+            data-i18n="vert.book">
+        Rezervă Masă
+      </span>
+    </button>
+
+    <!-- ── 3. Evenimente ── -->
+    <button data-show-panel="panel-evenimente"
+            class="group border-r border-b border-stone-200 bg-white
+                   hover:bg-yellow-50/40 transition-colors duration-200
+                   cursor-pointer flex flex-col items-center text-center
+                   px-4 py-5 md:px-4 md:py-7
+                   min-h-[136px] md:min-h-[150px]">
+      <div class="w-11 h-11 rounded-full border border-stone-200
+                  flex items-center justify-center mb-3 md:mb-3
+                  group-hover:border-forest/35 transition-colors shrink-0">
+        <i class="fas fa-glass-cheers text-stone-400 group-hover:text-forest transition-colors"
+           style="font-size:15px"></i>
+      </div>
+      <p class="text-[10px] font-semibold uppercase tracking-widest2 text-forest mb-1 md:mb-2"
+         data-i18n="vert.events">Evenimente</p>
+      <p class="text-[11px] text-stone-400 font-light leading-snug max-w-[140px] md:max-w-[120px]">
+        Banchete, nunți și întâlniri private în spații elegante
+      </p>
+    </button>
+
+    <!-- ── 4. Casa Emil ── -->
+    <div class="group relative border-r border-b border-stone-200 bg-white
+                hover:bg-yellow-50/40 transition-colors duration-200">
+      <a href="#" data-tooltip="tooltip-casaemil"
+         class="flex flex-col items-center text-center
+                px-4 py-5 md:px-4 md:py-7
+                min-h-[136px] md:min-h-[150px] h-full w-full">
+        <div class="w-11 h-11 rounded-full border border-stone-200
+                    flex items-center justify-center mb-3 md:mb-3
+                    group-hover:border-forest/35 transition-colors shrink-0">
+          <i class="fas fa-home text-stone-400 group-hover:text-forest transition-colors"
+             style="font-size:15px"></i>
+        </div>
+        <p class="text-[10px] font-semibold uppercase tracking-widest2 text-forest mb-1 md:mb-2"
+           data-i18n="vert.casa-emil.mobile">Casa Emil</p>
+        <p class="text-[11px] text-stone-400 font-light leading-snug max-w-[140px] md:max-w-[120px]">
+          Cazare de lux în inima munților Poiana Brașov
+        </p>
+      </a>
+      <span id="tooltip-casaemil"
+            class="absolute top-full mt-1 left-1/2 -translate-x-1/2 z-10
+                   text-[9px] tracking-wide italic text-bark whitespace-nowrap
+                   bg-white px-2 py-0.5 border border-stone-100 shadow-sm
+                   opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                   pointer-events-none">
+        Se redeschide · Decembrie 2026
+      </span>
+    </div>
+
+    <!-- ── 5. Roua Origins Coffee — col-span-2 on mobile, 1 on desktop ── -->
+    <div class="group relative border-r border-b border-stone-200 bg-white
+                hover:bg-yellow-50/40 transition-colors duration-200
+                col-span-2 md:col-span-1">
+      <a href="#" data-tooltip="tooltip-roua"
+         class="flex flex-col items-center text-center
+                px-4 py-5 md:px-4 md:py-7
+                min-h-[136px] md:min-h-[150px] h-full w-full">
+        <div class="w-11 h-11 rounded-full border border-stone-200
+                    flex items-center justify-center mb-3 md:mb-3
+                    group-hover:border-forest/35 transition-colors shrink-0">
+          <i class="fas fa-coffee text-stone-400 group-hover:text-forest transition-colors"
+             style="font-size:15px"></i>
+        </div>
+        <p class="text-[10px] font-semibold uppercase tracking-widest2 text-forest mb-2">
+          Roua Origins Coffee
+        </p>
+        <p class="text-[11px] text-stone-400 font-light leading-snug max-w-[140px] md:max-w-[120px]">
+          Cafea de specialitate din origini selectate cu grijă
+        </p>
+      </a>
+      <span id="tooltip-roua"
+            class="absolute top-full mt-1 left-1/2 -translate-x-1/2 z-10
+                   text-[9px] tracking-wide italic text-bark whitespace-nowrap
+                   bg-white px-2 py-0.5 border border-stone-100 shadow-sm
+                   opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                   pointer-events-none">
+        Din 13 Iunie 2026
+      </span>
+    </div>
+
+    </div><!-- /buttons grid -->
+
+  </div><!-- /WHITE BUTTONS COMPONENT -->
 
 </section>
 
