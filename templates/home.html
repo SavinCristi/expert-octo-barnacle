@@ -32,12 +32,23 @@
     .hero-title-block { padding-top: calc(4rem + 7vh); }
     .hero-h1 {
       font-size: clamp(2.88rem, 9.36vw, 7.92rem);
-      text-shadow: 0 2px 24px rgba(0,0,0,0.55), 0 4px 60px rgba(13,51,32,0.55);
+      text-shadow:
+        0 0 3px  rgba(0,0,0,0.92),
+        0 0 10px rgba(0,0,0,0.82),
+        0 0 22px rgba(0,0,0,0.65),
+        0 0 44px rgba(0,0,0,0.42),
+        0 0 72px rgba(8,38,22,0.26),
+        0 0 105px rgba(8,38,22,0.12);
     }
     .hero-ftf {
       font-size: clamp(1.02rem, 2.64vw, 2.4rem);
       color: rgba(255,255,255,0.82);
-      text-shadow: 0 2px 12px rgba(0,0,0,0.45);
+      text-shadow:
+        0 0 2px  rgba(0,0,0,0.88),
+        0 0 8px  rgba(0,0,0,0.74),
+        0 0 18px rgba(0,0,0,0.54),
+        0 0 36px rgba(8,38,22,0.34),
+        0 0 58px rgba(8,38,22,0.16);
     }
   }
   @media (min-width: 1024px) {
@@ -88,12 +99,14 @@
 
     <!-- Title: Vânătorul + "Forest to Fork" — top-center on the image -->
     <div class="hero-title-block absolute top-0 left-0 right-0 flex flex-col items-center text-center px-6">
-      <h1 class="hero-h1 font-serif font-bold text-white leading-none mb-2 sm:mb-3">
-        Vânătorul
-      </h1>
-      <p class="hero-ftf font-serif italic leading-tight">
-        "Forest to Fork"
-      </p>
+      <div class="hero-title-glow flex flex-col items-center">
+        <h1 class="hero-h1 font-serif font-bold text-white leading-none mb-2 sm:mb-3">
+          Vânătorul
+        </h1>
+        <p class="hero-ftf font-serif italic leading-tight">
+          "Forest to Fork"
+        </p>
+      </div>
     </div>
 
     <!-- Tagline block — white text, bottom of image, near the buttons -->
@@ -112,9 +125,13 @@
           Bucătărie tradițională cu un gram de modernism
         </p>
 
-        <p class="hidden md:block text-white/70 md:text-sm leading-relaxed font-light md:mb-2"
+        <p class="hidden md:block text-white/70 md:text-sm leading-relaxed font-light md:mb-2 md:whitespace-nowrap"
            data-i18n="hero.desc">
           Savurați preparate autentice și din vânat în spiritul ospitalității montane românești.
+        </p>
+        <p class="hidden md:block font-serif italic text-white/55 md:text-sm md:mt-1"
+           data-i18n="hero.heritage">
+          Povestea Continuă din 1975
         </p>
         <div class="hidden md:flex items-center gap-5 mt-7">
           <span class="h-px flex-1 bg-white/25"></span>
@@ -130,7 +147,7 @@
 
 
   <!-- ── WHITE BUTTONS COMPONENT: sits below image; pulled up on mobile ── -->
-  <div class="-mt-[calc(10%+6rem+16.1vh)] md:mt-0 relative z-10
+  <div class="-mt-[calc(10%+6rem+19.6vh)] md:mt-0 relative z-10
               mx-3 sm:mx-8 md:mx-auto md:max-w-5xl
               bg-white border border-stone-200
               shadow-[0_8px_48px_rgba(0,0,0,0.14)]
@@ -144,8 +161,8 @@
             class="group border-r border-b border-stone-200 bg-white
                    hover:bg-yellow-50/40 transition-colors duration-200
                    cursor-pointer flex flex-col items-center text-center
-                   px-4 py-5 md:px-4 md:py-7
-                   min-h-[136px] md:min-h-[150px]">
+                   px-4 py-3 md:px-4 md:py-7
+                   min-h-[148px] md:min-h-[240px]">
       <div class="w-11 h-11 rounded-full border border-stone-200
                   flex items-center justify-center mb-3 md:mb-3
                   group-hover:border-forest/35 transition-colors shrink-0">
@@ -154,7 +171,12 @@
       </div>
       <p class="text-[10px] font-semibold uppercase tracking-widest2 text-forest mb-1 md:mb-2"
          data-i18n="vert.menu.mobile">Meniu</p>
-      <p class="text-[11px] text-stone-400 font-light leading-snug max-w-[140px] md:max-w-[120px]">
+      <p class="md:hidden text-[11px] text-stone-400 font-light leading-snug max-w-[140px]"
+         data-i18n="vert.menu.desc.mobile">
+        Preparate tradiționale și bucătărie montană autentică
+      </p>
+      <p class="hidden md:block text-[11px] text-stone-400 font-light leading-snug md:max-w-[120px]"
+         data-i18n="vert.menu.desc">
         Preparate tradiționale de vânat și bucătărie montană autentică
       </p>
     </button>
@@ -164,8 +186,8 @@
             class="group border-r border-b border-stone-200
                    bg-[#0d3320] hover:bg-[#0a2b1c] transition-colors duration-200
                    cursor-pointer flex flex-col items-center text-center
-                   px-4 py-5 md:px-4 md:py-7
-                   min-h-[136px] md:min-h-[150px]">
+                   px-4 py-3 md:px-4 md:py-7
+                   min-h-[148px] md:min-h-[240px]">
       <div class="w-11 h-11 rounded-full border border-white/20
                   flex items-center justify-center mb-3 md:mb-3 shrink-0">
         <i class="fas fa-calendar-check text-white/65 group-hover:text-white/90 transition-colors"
@@ -173,7 +195,8 @@
       </div>
       <p class="text-[10px] font-semibold uppercase tracking-widest2 text-white mb-1 md:mb-2"
          data-i18n="vert.book">Rezervă Masă</p>
-      <p class="hidden md:block text-[11px] text-white/55 font-light leading-snug max-w-[120px] mb-5">
+      <p class="hidden md:block text-[11px] text-white/55 font-light leading-snug max-w-[120px] mb-5"
+         data-i18n="vert.book.desc">
         Rezervă-ți locul pentru o seară de neuitat în inima munților
       </p>
       <span class="mt-auto inline-block px-4 py-1.5 rounded-full border border-white/40
@@ -189,8 +212,8 @@
             class="group border-r border-b border-stone-200 bg-white
                    hover:bg-yellow-50/40 transition-colors duration-200
                    cursor-pointer flex flex-col items-center text-center
-                   px-4 py-5 md:px-4 md:py-7
-                   min-h-[136px] md:min-h-[150px]">
+                   px-4 py-3 md:px-4 md:py-7
+                   min-h-[148px] md:min-h-[240px]">
       <div class="w-11 h-11 rounded-full border border-stone-200
                   flex items-center justify-center mb-3 md:mb-3
                   group-hover:border-forest/35 transition-colors shrink-0">
@@ -199,8 +222,13 @@
       </div>
       <p class="text-[10px] font-semibold uppercase tracking-widest2 text-forest mb-1 md:mb-2"
          data-i18n="vert.events">Evenimente</p>
-      <p class="text-[11px] text-stone-400 font-light leading-snug max-w-[140px] md:max-w-[120px]">
-        Banchete, nunți și întâlniri private în spații elegante
+      <p class="md:hidden text-[11px] text-stone-400 font-light leading-snug max-w-[140px]"
+         data-i18n="vert.events.desc.mobile">
+        Corporate, nunți și întâlniri private în spații elegante
+      </p>
+      <p class="hidden md:block text-[11px] text-stone-400 font-light leading-snug md:max-w-[120px]"
+         data-i18n="vert.events.desc">
+        Corporate, nunți și întâlniri private în spații elegante
       </p>
     </button>
 
@@ -209,8 +237,8 @@
                 hover:bg-yellow-50/40 transition-colors duration-200">
       <a href="#" data-tooltip="tooltip-casaemil"
          class="flex flex-col items-center text-center
-                px-4 py-5 md:px-4 md:py-7
-                min-h-[136px] md:min-h-[150px] h-full w-full">
+                px-4 py-3 md:px-4 md:py-7
+                min-h-[148px] md:min-h-[240px] h-full w-full">
         <div class="w-11 h-11 rounded-full border border-stone-200
                     flex items-center justify-center mb-3 md:mb-3
                     group-hover:border-forest/35 transition-colors shrink-0">
@@ -219,8 +247,13 @@
         </div>
         <p class="text-[10px] font-semibold uppercase tracking-widest2 text-forest mb-1 md:mb-2"
            data-i18n="vert.casa-emil.mobile">Casa Emil</p>
-        <p class="text-[11px] text-stone-400 font-light leading-snug max-w-[140px] md:max-w-[120px]">
-          Cazare de lux în inima munților Poiana Brașov
+        <p class="md:hidden text-[11px] text-stone-400 font-light leading-snug max-w-[140px]"
+           data-i18n="vert.casa-emil.desc.mobile">
+          Cazare premium în inima Poienii Brașov
+        </p>
+        <p class="hidden md:block text-[11px] text-stone-400 font-light leading-snug md:max-w-[120px]"
+           data-i18n="vert.casa-emil.desc">
+          Cazare premium în inima Poienii Brașov
         </p>
       </a>
       <span id="tooltip-casaemil"
@@ -239,8 +272,8 @@
                 col-span-2 md:col-span-1">
       <a href="#" data-tooltip="tooltip-roua"
          class="flex flex-col items-center text-center
-                px-4 py-5 md:px-4 md:py-7
-                min-h-[136px] md:min-h-[150px] h-full w-full">
+                px-4 py-3 md:px-4 md:py-7
+                min-h-[148px] md:min-h-[240px] h-full w-full">
         <div class="w-11 h-11 rounded-full border border-stone-200
                     flex items-center justify-center mb-3 md:mb-3
                     group-hover:border-forest/35 transition-colors shrink-0">
@@ -250,7 +283,8 @@
         <p class="text-[10px] font-semibold uppercase tracking-widest2 text-forest mb-2">
           Roua Origins Coffee
         </p>
-        <p class="text-[11px] text-stone-400 font-light leading-snug max-w-[140px] md:max-w-[120px]">
+        <p class="text-[11px] text-stone-400 font-light leading-snug max-w-[140px] md:max-w-[120px]"
+           data-i18n="vert.roua.desc">
           Cafea de specialitate din origini selectate cu grijă
         </p>
       </a>
@@ -716,7 +750,7 @@
   <!-- Section header -->
   <div class="max-w-7xl mx-auto px-6 lg:px-12 pt-10 pb-6 md:pt-20 md:pb-10">
     <div class="flex items-baseline gap-6 border-b border-stone-200 pb-6">
-      <h2 class="font-serif text-3xl sm:text-4xl text-forest">Evenimente</h2>
+      <h2 class="font-serif text-3xl sm:text-4xl text-forest" data-i18n="events.title">Evenimente</h2>
       <span class="flex-1 h-px self-center bg-stone-100"></span>
       <p class="text-[10px] uppercase tracking-widest3 text-bark" data-i18n="events.subtitle">Spațiu disponibil</p>
     </div>
@@ -729,26 +763,26 @@
 
       <!-- ── Sala Mare — 90 locuri ── -->
       <div class="border border-stone-200 bg-cream p-5 flex flex-col">
-        <h3 class="font-serif text-xl text-forest mb-1">Sala Mare</h3>
-        <p class="text-2xl font-bold text-forest mb-1">90 <span class="text-sm font-normal text-stone-400">locuri</span></p>
+        <h3 class="font-serif text-xl text-forest mb-1" data-i18n="events.sala-mare.title">Sala Mare</h3>
+        <p class="text-2xl font-bold text-forest mb-1">90 <span class="text-sm font-normal text-stone-400" data-i18n="events.seats">locuri</span></p>
         <p class="text-xs text-stone-400 font-light leading-relaxed mt-auto pt-3 border-t border-stone-100" data-i18n="events.sala-mare.desc">
-          Spațiu generos pentru banchete și ceremonii, cu luminatoare naturale și decor montan autentic.
+          Spațiu generos pentru banchete și ceremonii, cu luminatoare naturale și decor montan.
         </p>
       </div>
 
-      <!-- ── Sala Mică — 60 locuri ── -->
+      <!-- ── Salonul Cerbului — 60 locuri ── -->
       <div class="border border-stone-200 bg-cream p-5 flex flex-col">
-        <h3 class="font-serif text-xl text-forest mb-1">Sala Mică</h3>
-        <p class="text-2xl font-bold text-forest mb-1">60 <span class="text-sm font-normal text-stone-400">locuri</span></p>
+        <h3 class="font-serif text-xl text-forest mb-1" data-i18n="events.sala-cerb.title">Salonul Cerbului</h3>
+        <p class="text-2xl font-bold text-forest mb-1">60 <span class="text-sm font-normal text-stone-400" data-i18n="events.seats">locuri</span></p>
         <p class="text-xs text-stone-400 font-light leading-relaxed mt-auto pt-3 border-t border-stone-100" data-i18n="events.sala-mica.desc">
           Elegantă și intimă, ideală pentru conferințe, cine de afaceri sau reuniuni private.
         </p>
       </div>
 
-      <!-- ── Salonul Caprioarei — 36 locuri ── -->
+      <!-- ── Salonul Căprioarei — 36 locuri ── -->
       <div class="border border-stone-200 bg-cream p-5 flex flex-col">
-        <h3 class="font-serif text-xl text-forest mb-1">Salonul Caprioarei</h3>
-        <p class="text-2xl font-bold text-forest mb-1">36 <span class="text-sm font-normal text-stone-400">locuri</span></p>
+        <h3 class="font-serif text-xl text-forest mb-1" data-i18n="events.salon-cap.title">Salonul Căprioarei</h3>
+        <p class="text-2xl font-bold text-forest mb-1">36 <span class="text-sm font-normal text-stone-400" data-i18n="events.seats">locuri</span></p>
         <p class="text-xs text-stone-400 font-light leading-relaxed mt-auto pt-3 border-t border-stone-100" data-i18n="events.salon-cap.desc">
           Salon intim cu specific montan, ideal pentru celebrări speciale și mese de protocol.
         </p>
@@ -757,7 +791,7 @@
       <!-- ── Grădina de Vară — 70 locuri ── -->
       <div class="border border-stone-200 bg-cream p-5 flex flex-col">
         <h3 class="font-serif text-xl text-forest mb-1" data-i18n="events.gradina.title">Grădina de Vară</h3>
-        <p class="text-2xl font-bold text-forest mb-1">70 <span class="text-sm font-normal text-stone-400">locuri</span></p>
+        <p class="text-2xl font-bold text-forest mb-1">70 <span class="text-sm font-normal text-stone-400" data-i18n="events.seats">locuri</span></p>
         <p class="text-xs text-stone-400 font-light leading-relaxed mt-auto pt-3 border-t border-stone-100" data-i18n="events.gradina.desc">
           Terasă în aer liber cu priveliște montană, pergolă acoperită și ambient natural pitoresc.
         </p>
@@ -774,14 +808,14 @@
           <p class="font-serif text-4xl text-forest leading-none">
             186
           </p>
-          <p class="text-xs text-stone-400 mt-1">Sala Mare · 90 &nbsp;·&nbsp; Sala Mică · 60 &nbsp;·&nbsp; Salonul Caprioarei · 36</p>
+          <p class="text-xs text-stone-400 mt-1" data-i18n="events.capacity.summary">Sala Mare · 90 · Salonul Cerbului · 60 · Salonul Căprioarei · 36</p>
         </div>
         <div>
           <p class="text-[10px] uppercase tracking-widest2 text-bark mb-1" data-i18n="events.exterior">Număr Locuri Exterior</p>
           <p class="font-serif text-4xl text-forest leading-none">
             70
           </p>
-          <p class="text-xs text-stone-400 mt-1">Grădina de Vară · 70</p>
+          <p class="text-xs text-stone-400 mt-1" data-i18n="events.capacity.outdoor">Grădina de Vară · 70</p>
         </div>
       </div>
       <a href="#ev-inquiry"
@@ -836,10 +870,10 @@
     <!-- Header -->
     <div class="mb-12">
       <p class="text-[10px] uppercase tracking-widest3 text-bark mb-3">
-        Poiana Brașov · Restaurant Vânătorul
+        Poiana Brașov<br class="md:hidden"><span class="hidden md:inline"> · </span>Restaurant Vânătorul
       </p>
       <div class="flex items-baseline gap-6 border-b border-stone-200 pb-5">
-        <h2 class="font-serif text-3xl sm:text-4xl text-forest">Solicită o Ofertă</h2>
+        <h2 class="font-serif text-3xl sm:text-4xl text-forest" data-i18n="ev.form.title">Solicită o Ofertă</h2>
         <span class="flex-1 h-px self-center bg-stone-100"></span>
       </div>
     </div>
@@ -853,17 +887,18 @@
         <!-- Name + Phone -->
         <div class="grid sm:grid-cols-2 gap-6">
           <div class="flex flex-col gap-2">
-            <label class="text-[10px] uppercase tracking-widest2 text-bark" for="ev-name">
+            <label class="text-[10px] uppercase tracking-widest2 text-bark" for="ev-name" data-i18n="ev.form.name">
               Nume complet
             </label>
             <input id="ev-name" name="name" type="text" required
                    placeholder="Ion Popescu"
+                   data-i18n-placeholder="ev.form.placeholder.name"
                    class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
                           placeholder:text-stone-300 focus:outline-none focus:border-forest
                           transition-colors" />
           </div>
           <div class="flex flex-col gap-2">
-            <label class="text-[10px] uppercase tracking-widest2 text-bark" for="ev-phone">
+            <label class="text-[10px] uppercase tracking-widest2 text-bark" for="ev-phone" data-i18n="ev.form.phone">
               Telefon
             </label>
             <input id="ev-phone" name="phone" type="tel" required
@@ -889,7 +924,7 @@
         <!-- Desired Date + Event Type -->
         <div class="grid sm:grid-cols-2 gap-6">
           <div class="flex flex-col gap-2">
-            <label class="text-[10px] uppercase tracking-widest2 text-bark" for="ev-date">
+            <label class="text-[10px] uppercase tracking-widest2 text-bark" for="ev-date" data-i18n="ev.form.date">
               Data dorită
             </label>
             <input id="ev-date" name="desired_date" type="date" required
@@ -897,29 +932,30 @@
                           focus:outline-none focus:border-forest transition-colors" />
           </div>
           <div class="flex flex-col gap-2">
-            <label class="text-[10px] uppercase tracking-widest2 text-bark" for="ev-type">
+            <label class="text-[10px] uppercase tracking-widest2 text-bark" for="ev-type" data-i18n="ev.form.type">
               Tip eveniment
             </label>
             <select id="ev-type" name="event_type" required
                     class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
                            focus:outline-none focus:border-forest transition-colors appearance-none">
-              <option value="" disabled selected>Selectează…</option>
-              <option value="wedding">Nuntă</option>
+              <option value="" disabled selected data-i18n="ev.form.type.select">Selectează…</option>
+              <option value="wedding" data-i18n="ev.form.type.wedding">Nuntă</option>
               <option value="corporate">Corporate</option>
-              <option value="party">Petrecere Privată</option>
-              <option value="other">Altceva</option>
+              <option value="party" data-i18n="ev.form.type.party">Petrecere Privată</option>
+              <option value="other" data-i18n="ev.form.type.other">Altceva</option>
             </select>
           </div>
         </div>
 
         <!-- Estimated Guests -->
         <div class="flex flex-col gap-2 sm:w-1/2">
-          <label class="text-[10px] uppercase tracking-widest2 text-bark" for="ev-guests">
+          <label class="text-[10px] uppercase tracking-widest2 text-bark" for="ev-guests" data-i18n="ev.form.guests">
             Număr estimat de persoane
           </label>
           <input id="ev-guests" name="estimated_guests" type="number"
                  min="1" max="1000" required
                  placeholder="ex. 120"
+                 data-i18n-placeholder="ev.form.placeholder.guests"
                  class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
                         placeholder:text-stone-300 focus:outline-none focus:border-forest
                         transition-colors" />
@@ -928,11 +964,12 @@
         <!-- Message / Special Requirements -->
         <div class="flex flex-col gap-2">
           <label class="text-[10px] uppercase tracking-widest2 text-bark" for="ev-message">
-            Detalii și cerințe speciale
-            <span class="text-stone-400 normal-case tracking-normal ml-1">(opțional)</span>
+            <span data-i18n="ev.form.message">Detalii și cerințe speciale</span>
+            <span class="text-stone-400 normal-case tracking-normal ml-1" data-i18n="ev.form.optional">(opțional)</span>
           </label>
           <textarea id="ev-message" name="message" rows="4"
                     placeholder="Meniu preferat, aranjamente, cerințe specifice…"
+                    data-i18n-placeholder="ev.form.placeholder.message"
                     class="border border-stone-200 bg-transparent p-3 text-sm text-forest
                            placeholder:text-stone-300 focus:outline-none focus:border-forest
                            transition-colors resize-none"></textarea>
@@ -943,9 +980,8 @@
           <input type="checkbox" id="ev-gdpr"
                  class="mt-0.5 w-4 h-4 shrink-0 accent-forest cursor-pointer" />
           <label for="ev-gdpr" class="text-xs text-stone-500 font-light leading-relaxed cursor-pointer select-none">
-            Acceptă
-            <a href="{% url 'privacy_policy' %}" target="_blank" rel="noopener"
-               class="underline hover:text-forest transition-colors">Politica de Confidențialitate</a>
+            <span data-i18n="ev.form.gdpr.accept">Acceptă </span><a href="{% url 'privacy_policy' %}" target="_blank" rel="noopener"
+               class="underline hover:text-forest transition-colors" data-i18n="ev.form.gdpr.link">Politica de Confidențialitate</a>
           </label>
         </div>
 
@@ -954,10 +990,10 @@
           <button id="ev-submit" type="submit"
                   class="px-8 py-3 bg-forest text-cream text-[11px] uppercase tracking-widest2
                          hover:bg-emerald-900 disabled:opacity-50 disabled:cursor-not-allowed
-                         transition-colors duration-200">
+                         transition-colors duration-200" data-i18n="ev.form.submit">
             Trimite cererea
           </button>
-          <p class="text-xs text-stone-400 font-light">
+          <p class="text-xs text-stone-400 font-light" data-i18n="ev.form.notice">
             Vă vom contacta pentru a discuta detaliile evenimentului.
           </p>
         </div>
