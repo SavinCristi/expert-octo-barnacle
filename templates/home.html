@@ -377,7 +377,7 @@
 <div class="bg-white">
   <div class="max-w-7xl mx-auto px-6 lg:px-12 pt-10 pb-6 md:pt-16 md:pb-8">
     <div class="flex items-baseline gap-6 border-b border-stone-200 pb-5">
-      <h2 class="font-serif text-3xl sm:text-4xl text-forest" id="meniu">Meniu</h2>
+      <h2 class="font-serif text-3xl sm:text-4xl text-forest" id="meniu" data-i18n="meniu.title">Meniu</h2>
       <span class="flex-1 h-px self-center bg-stone-100"></span>
       <p class="text-[10px] uppercase tracking-widest3 text-bark" data-i18n="meniu.subtitle">Bucătăria noastră</p>
     </div>
@@ -1482,6 +1482,15 @@
 
   // ── Initialise: default to Mâncare → Antreuri ─────────────────────────
   showCategory('mancare', lastSub.mancare);
+})();
+</script>
+
+<script>
+(function () {
+  if (new URLSearchParams(window.location.search).get('open') === 'meniu') {
+    const btn = document.querySelector('[data-show-panel="panel-meniu"]');
+    if (btn) btn.click();
+  }
 })();
 </script>
 {% endblock %}
