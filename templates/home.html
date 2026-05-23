@@ -529,8 +529,8 @@
 
     <!-- Header -->
     <div class="mb-14">
-      <p class="text-[10px] uppercase tracking-widest3 text-bark mb-3" data-i18n="rezervare.location">
-        Poiana Brașov · Restaurant Vânătorul
+      <p class="text-[10px] uppercase tracking-widest3 text-bark mb-3">
+        Poiana Brașov<br class="md:hidden"><span class="hidden md:inline"> · </span>Restaurant Vânătorul
       </p>
       <div class="flex items-baseline gap-6">
         <h2 class="font-serif text-3xl sm:text-4xl text-forest" data-i18n="rezervare.title">Rezervă masă</h2>
@@ -639,9 +639,8 @@
           <input type="checkbox" id="r-gdpr"
                  class="mt-0.5 w-4 h-4 shrink-0 accent-forest cursor-pointer" />
           <label for="r-gdpr" class="text-xs text-stone-500 font-light leading-relaxed cursor-pointer select-none">
-            Acceptă
-            <a href="{% url 'privacy_policy' %}" target="_blank" rel="noopener"
-               class="underline hover:text-forest transition-colors">Politica de Confidențialitate</a>
+            <span data-i18n="rezervare.gdpr.accept">Acceptă </span><a href="{% url 'privacy_policy' %}" target="_blank" rel="noopener"
+               class="underline hover:text-forest transition-colors" data-i18n="rezervare.gdpr.link">Politica de Confidențialitate</a>
           </label>
         </div>
 
