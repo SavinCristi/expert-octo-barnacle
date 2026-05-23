@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ro" class="scroll-smooth">
 <head>
@@ -86,8 +87,10 @@
       <div class="flex flex-1 items-center gap-4">
         <a href="/" class="flex items-center gap-2.5 group shrink-0">
           <span class="w-7 h-7 bg-yellow-400 flex items-center justify-center shrink-0
-                       group-hover:bg-yellow-300 transition-colors">
-            <span class="font-serif text-sm font-bold text-forest leading-none">V</span>
+                       group-hover:bg-yellow-300 transition-colors overflow-hidden">
+            <img src="{% static 'logo.jpeg' %}" class="w-full h-full object-contain"
+                 style="filter: grayscale(1) contrast(10); mix-blend-mode: multiply;"
+                 alt="">
           </span>
           <span class="font-serif text-[15px] text-forest tracking-wide leading-none">
             <span class="md:hidden">Vânătorul</span>
@@ -224,8 +227,10 @@
       <!-- Brand -->
       <div class="sm:col-span-2 lg:col-span-1">
         <div class="flex items-center gap-2.5 mb-4">
-          <span class="w-7 h-7 bg-yellow-400 flex items-center justify-center shrink-0">
-            <span class="font-serif text-sm font-bold text-forest">V</span>
+          <span class="w-7 h-7 bg-yellow-400 flex items-center justify-center shrink-0 overflow-hidden">
+            <img src="{% static 'logo.jpeg' %}" class="w-full h-full object-contain"
+                 style="filter: grayscale(1) contrast(10); mix-blend-mode: multiply;"
+                 alt="">
           </span>
           <span class="font-serif text-base text-forest">Vânătorul</span>
         </div>
@@ -384,13 +389,13 @@
         'events.title': 'Evenimente',
         'events.subtitle': 'Spațiu disponibil',
         'events.location': 'Poiana Brașov, Brașov, România',
-        'events.sala-mare.title': 'Sala Mare',
+        'events.sala-mare.title': 'Salonul Vânătorului',
         'events.sala-cerb.title': 'Salonul Cerbului',
         'events.salon-cap.title': 'Salonul Căprioarei',
         'events.sala-mare.desc': 'Spațiu generos pentru banchete și ceremonii, cu luminatoare naturale și decor montan.',
         'events.sala-mica.desc': 'Elegantă și intimă, ideală pentru conferințe, cine de afaceri sau reuniuni private.',
         'events.salon-cap.desc': 'Salon intim cu specific montan, ideal pentru celebrări speciale și mese de protocol.',
-        'events.capacity.summary': 'Sala Mare · 90 · Salonul Cerbului · 60 · Salonul Căprioarei · 36',
+        'events.capacity.summary': 'Salonul Vânătorului · 90 · Salonul Cerbului · 60 · Salonul Căprioarei · 36',
         'events.seats': 'locuri',
         'events.capacity.outdoor': 'Grădina de Vară · 70',
         'ev.form.title': 'Solicită o Ofertă',
@@ -472,13 +477,13 @@
         'events.title': 'Events',
         'events.subtitle': 'Available space',
         'events.location': 'Poiana Brașov, Brașov, Romania',
-        'events.sala-mare.title': 'Grand Hall',
+        'events.sala-mare.title': 'Hunters Lounge',
         'events.sala-cerb.title': 'Stag Lounge',
         'events.salon-cap.title': 'Deer Lounge',
         'events.sala-mare.desc': 'Generous space for banquets and ceremonies, with natural skylights and mountain decor.',
         'events.sala-mica.desc': 'Elegant and intimate, ideal for conferences, business dinners or private gatherings.',
         'events.salon-cap.desc': 'Intimate salon with mountain character, ideal for special celebrations and protocol dinners.',
-        'events.capacity.summary': 'Grand Hall · 90 · Stag Lounge · 60 · Deer Lounge · 36',
+        'events.capacity.summary': 'Hunters Lounge · 90 · Stag Lounge · 60 · Deer Lounge · 36',
         'events.seats': 'seats',
         'events.capacity.outdoor': 'Summer Garden · 70',
         'ev.form.title': 'Request a Quote',

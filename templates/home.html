@@ -660,9 +660,16 @@
             <select id="r-guests" name="guests"
                     class="border-b border-stone-300 bg-transparent py-2.5 text-sm text-forest
                            focus:outline-none focus:border-forest transition-colors appearance-none">
-              {% for n in "12345678" %}
+              {% for n in "123456789" %}
               <option value="{{ n }}">{{ n }} persoane</option>
               {% endfor %}
+              <option value="10">10 persoane</option>
+              <option value="11">11 persoane</option>
+              <option value="12">12 persoane</option>
+              <option value="13">13 persoane</option>
+              <option value="14">14 persoane</option>
+              <option value="15">15 persoane</option>
+              <option value="16">16 persoane</option>
             </select>
           </div>
         </div>
@@ -793,13 +800,13 @@
 
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
 
-      <!-- ── Sala Mare — 90 locuri ── -->
+      <!-- ── Salonul Vânătorului — 90 locuri ── -->
       <div class="venue-card">
         <div class="venue-card-bg"
              style="background-image: url('{% static 'grand_hall.jpeg' %}');"></div>
         <div class="venue-card-scrim"></div>
         <div class="venue-card-content">
-          <h3 class="font-serif text-xl text-white mb-1" data-i18n="events.sala-mare.title">Sala Mare</h3>
+          <h3 class="font-serif text-xl text-white mb-1" data-i18n="events.sala-mare.title">Salonul Vânătorului</h3>
           <p class="text-2xl font-bold text-white mb-1">90 <span class="text-sm font-normal text-white/70" data-i18n="events.seats">locuri</span></p>
           <p class="text-xs text-white/80 font-light leading-relaxed mt-3 pt-3 border-t border-white/20" data-i18n="events.sala-mare.desc">
             Spațiu generos pentru banchete și ceremonii, cu luminatoare naturale și decor montan.
@@ -810,7 +817,7 @@
       <!-- ── Salonul Cerbului — 60 locuri ── -->
       <div class="venue-card">
         <div class="venue-card-bg"
-             style="background-image: url('{% static 'Stag_Lounge.jpeg' %}');"></div>
+             style="background-image: url('{% static 'Doe_Lounge.jpeg' %}');"></div>
         <div class="venue-card-scrim"></div>
         <div class="venue-card-content">
           <h3 class="font-serif text-xl text-white mb-1" data-i18n="events.sala-cerb.title">Salonul Cerbului</h3>
@@ -824,7 +831,7 @@
       <!-- ── Salonul Căprioarei — 36 locuri ── -->
       <div class="venue-card">
         <div class="venue-card-bg"
-             style="background-image: url('{% static 'Doe_Lounge.jpeg' %}');"></div>
+             style="background-image: url('{% static 'Stag_Lounge.jpeg' %}');"></div>
         <div class="venue-card-scrim"></div>
         <div class="venue-card-content">
           <h3 class="font-serif text-xl text-white mb-1" data-i18n="events.salon-cap.title">Salonul Căprioarei</h3>
@@ -835,8 +842,10 @@
         </div>
       </div>
 
-      <!-- ── Grădina de Vară — 70 locuri (forest fallback, no photo) ── -->
+      <!-- ── Grădina de Vară — 70 locuri ── -->
       <div class="venue-card">
+        <div class="venue-card-bg"
+             style="background-image: url('{% static 'summer_garden.jpeg' %}');"></div>
         <div class="venue-card-scrim"></div>
         <div class="venue-card-content">
           <h3 class="font-serif text-xl text-white mb-1" data-i18n="events.gradina.title">Grădina de Vară</h3>
@@ -858,7 +867,7 @@
           <p class="font-serif text-4xl text-forest leading-none">
             186
           </p>
-          <p class="text-xs text-stone-400 mt-1" data-i18n="events.capacity.summary">Sala Mare · 90 · Salonul Cerbului · 60 · Salonul Căprioarei · 36</p>
+          <p class="text-xs text-stone-400 mt-1" data-i18n="events.capacity.summary">Salonul Vânătorului · 90 · Salonul Cerbului · 60 · Salonul Căprioarei · 36</p>
         </div>
         <div>
           <p class="text-[10px] uppercase tracking-widest2 text-bark mb-1" data-i18n="events.exterior">Număr Locuri Exterior</p>
